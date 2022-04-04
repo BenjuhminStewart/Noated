@@ -1,0 +1,12 @@
+TODO
+
+Listed from Most to Least Important
+
+1. Implement Better 'Fill' Algorithm
+2. Dynamically Size the Canvas Based on Application Size
+3. Add Undo / Redo Capabilities
+4. Add Resize Canvas
+5. Add 'Select' Feature where user can select area and move it or erase it.
+6. Add Color Dropper (Easy)
+7. Touch up UI (Find Better Icons & Research More Modern UI design for C#)
+8. Add Zoom Capilities
