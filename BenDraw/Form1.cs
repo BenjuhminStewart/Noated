@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,6 +34,7 @@ namespace BenDraw
         int x, y, sX, sY, cX, cY;
         bool isMouseDown = false;
         Button highlighted;
+        Stack<PictureBox> state = new Stack<PictureBox>();
 
         public Form1()
         {
@@ -42,6 +45,7 @@ namespace BenDraw
             index = 1;
             btn_show_color.BackColor = Color.Black;
             bm = new Bitmap(pic.Width, pic.Height);
+           
             g = Graphics.FromImage(bm);
             
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -51,8 +55,32 @@ namespace BenDraw
             pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             color_picker.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             pic.Image = bm;
+            state.Push(pic);
             highlighted = btn_pencil;
             SetHighlighted(highlighted);
+            
+        }
+
+        private void Clear()
+        {
+            g.Clear(Color.White);
+            pic.Image = bm;
+        }
+
+        private void Undo()
+        {
+            try
+            {
+                state.Pop();
+                pic = state.Peek();
+                Debug.WriteLine("{0}", bm.GetPixel(x, y));
+                
+            }
+            catch (Exception ex) 
+            {
+                Clear();
+                Debug.WriteLine("{0}", bm.GetPixel(x, y));
+            }
             
         }
 
@@ -96,9 +124,10 @@ namespace BenDraw
                     old = current;
                 }
 
+
+                
                 
             }
-
             pic.Refresh();
             x = e.X;
             y = e.Y;
@@ -137,6 +166,10 @@ namespace BenDraw
             {
                 g.DrawLine(p, cX, cY, x, y);
             }
+
+            Debug.WriteLine("{0}", bm);
+            pic.Refresh();
+            state.Push(pic);
         }
 
 
@@ -286,6 +319,22 @@ namespace BenDraw
 
             }
 
+            if(e.KeyCode == Keys.C)
+            {
+
+                Clear();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+
+                Undo();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
             if (e.KeyCode == Keys.P)
             {
                 //enter key is down
@@ -309,6 +358,8 @@ namespace BenDraw
             }
         }
 
+
+
         private void Numeric_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -331,6 +382,22 @@ namespace BenDraw
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 
+            }
+
+            if (e.KeyCode == Keys.C)
+            {
+
+                Clear();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+
+                Undo();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
 
             if (e.KeyCode == Keys.E)
