@@ -54,6 +54,7 @@ namespace BenDraw
             g.Clear(Color.White);
             pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             color_picker.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
+            color_picker_2.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             pic.Image = bm;
             state.Push(pic);
             highlighted = btn_pencil;
@@ -107,7 +108,13 @@ namespace BenDraw
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
         {
-            
+            if(bm.GetPixel(e.Location.X, e.Location.Y) == Color.Black)
+            {
+                pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-white.cur");
+            } else
+            {
+                pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
+            }
             if (paint)
             {
                 if (index == 1)
@@ -265,6 +272,47 @@ namespace BenDraw
             pic.Refresh();
         }
 
+        private void cp_MouseDown(object sender, MouseEventArgs e)
+        {
+            selectedColor = set_point(color_picker_2, e.Location);
+            btn_show_color.BackColor = ((Bitmap)color_picker_2.Image).GetPixel(selectedColor.X, selectedColor.Y);
+            currColor = btn_show_color.BackColor;
+
+            isMouseDown = true;
+        }
+
+        private void cp_MouseMove(object sender, MouseEventArgs e)
+        {
+            p.Color = btn_show_color.BackColor;
+            currColor = p.Color;
+            if (index == 0)
+            {
+                index = 1;
+            }
+            isMouseDown = false;
+        }
+
+        private void cp_MouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (isMouseDown)
+                {
+                    selectedColor = set_point(color_picker_2, e.Location);
+                    btn_show_color.BackColor = ((Bitmap)color_picker_2.Image).GetPixel(selectedColor.X, selectedColor.Y);
+                }
+            }
+            catch
+            {
+                btn_show_color.BackColor = Color.Black;
+                currColor = btn_show_color.BackColor;
+            }
+
+
+
+            pic.Refresh();
+        }
+
         private void btn_eraser_Click(object sender, EventArgs e)
         {
             index = 2;
@@ -361,6 +409,104 @@ namespace BenDraw
 
 
         private void Numeric_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //enter key is down
+
+                //this.doSomething();
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+
+            if (e.KeyCode == Keys.P)
+            {
+                //enter key is down
+
+                index = 1;
+                SetHighlighted(btn_pencil);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+
+            if (e.KeyCode == Keys.C)
+            {
+
+                Clear();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+
+                Undo();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.E)
+            {
+                //enter key is down
+
+                index = 2;
+                SetHighlighted(btn_eraser);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void panel_KeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //enter key is down
+
+                //this.doSomething();
+
+
+
+            }
+
+            if (e.KeyCode == Keys.P)
+            {
+                //enter key is down
+
+                index = 1;
+                SetHighlighted(btn_pencil);
+
+
+            }
+
+            if (e.KeyCode == Keys.C)
+            {
+
+                Clear();
+
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+
+                Undo();
+
+            }
+
+            if (e.KeyCode == Keys.E)
+            {
+                //enter key is down
+
+                index = 2;
+                SetHighlighted(btn_eraser);
+               
+            }
+        }
+
+        private void AnyButton_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
