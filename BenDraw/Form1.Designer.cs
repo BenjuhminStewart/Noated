@@ -47,12 +47,14 @@ namespace BenDraw
             this.btn_eraser = new System.Windows.Forms.Button();
             this.panel_lower = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
+            
             this.pic_color.SuspendLayout();
             this.panel_backdrop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
+            
             this.SuspendLayout();
             // 
             // pic_color
@@ -344,7 +346,6 @@ namespace BenDraw
             // pic
             // 
             this.pic.BackColor = System.Drawing.Color.White;
-            this.pic.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.pic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic.Location = new System.Drawing.Point(0, 0);
             this.pic.Name = "pic";
@@ -399,6 +400,7 @@ namespace BenDraw
         private System.Windows.Forms.Button btn_trash;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.TrackBar trackBar1;
+       
     }
 }
 

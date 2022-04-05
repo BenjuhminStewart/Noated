@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,16 +34,18 @@ namespace BenDraw
         int x, y, sX, sY, cX, cY;
         bool isMouseDown = false;
         Button highlighted;
+        Stack<PictureBox> state = new Stack<PictureBox>();
 
         public Form1()
         {
             InitializeComponent();
-            //this.Width = Screen.PrimaryScreen.Bounds.Width;
-            //this.Height = Screen.PrimaryScreen.Bounds.Height;
+            this.Width = Screen.PrimaryScreen.Bounds.Width;
+            this.Height = Screen.PrimaryScreen.Bounds.Height;
         
             index = 1;
             btn_show_color.BackColor = Color.Black;
             bm = new Bitmap(pic.Width, pic.Height);
+           
             g = Graphics.FromImage(bm);
             
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -51,8 +55,32 @@ namespace BenDraw
             pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             color_picker.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             pic.Image = bm;
+            state.Push(pic);
             highlighted = btn_pencil;
             SetHighlighted(highlighted);
+            
+        }
+
+        private void Clear()
+        {
+            g.Clear(Color.White);
+            pic.Image = bm;
+        }
+
+        private void Undo()
+        {
+            try
+            {
+                state.Pop();
+                pic = state.Peek();
+                Debug.WriteLine("{0}", bm.GetPixel(x, y));
+                
+            }
+            catch (Exception ex) 
+            {
+                Clear();
+                Debug.WriteLine("{0}", bm.GetPixel(x, y));
+            }
             
         }
 
@@ -71,7 +99,7 @@ namespace BenDraw
             {
 
                 Point pt = set_point(pic, e.Location);
-                Fill(bm, pt.X, pt.Y, currColor);
+                FloodFill(bm, pt, currColor);
             }
 
         }
@@ -96,9 +124,10 @@ namespace BenDraw
                     old = current;
                 }
 
+
+                
                 
             }
-
             pic.Refresh();
             x = e.X;
             y = e.Y;
@@ -137,6 +166,10 @@ namespace BenDraw
             {
                 g.DrawLine(p, cX, cY, x, y);
             }
+
+            Debug.WriteLine("{0}", bm);
+            pic.Refresh();
+            state.Push(pic);
         }
 
 
@@ -286,6 +319,22 @@ namespace BenDraw
 
             }
 
+            if(e.KeyCode == Keys.C)
+            {
+
+                Clear();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+
+                Undo();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
             if (e.KeyCode == Keys.P)
             {
                 //enter key is down
@@ -309,6 +358,8 @@ namespace BenDraw
             }
         }
 
+
+
         private void Numeric_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -331,6 +382,22 @@ namespace BenDraw
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 
+            }
+
+            if (e.KeyCode == Keys.C)
+            {
+
+                Clear();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+
+                Undo();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
 
             if (e.KeyCode == Keys.E)
@@ -370,33 +437,39 @@ namespace BenDraw
             return new Point((int)(pt.X*px), (int)(pt.Y*py));
         }
 
-        private void validate(Bitmap bm, Stack<Point> sp, int x, int y, Color old_color, Color new_color)
+        private static bool ColorMatch(Color a, Color b)
         {
-            Color cx = bm.GetPixel(x, y);
-            if(cx == old_color)
-            {
-                sp.Push(new Point(x, y));
-                bm.SetPixel(x, y, new_color);
-            }
+            return (a.ToArgb() & 0xffffff) == (b.ToArgb() & 0xffffff);
         }
-
-        public void Fill(Bitmap bm, int x, int y, Color new_clr)
+ 
+        static void FloodFill(Bitmap bmp, Point pt,  Color replacementColor)
         {
-            Color old_clr = bm.GetPixel(x, y);
-            Stack<Point> pixel = new Stack<Point>();
-            pixel.Push(new Point(x,y));
-            bm.SetPixel(x, y, new_clr);
-            if (old_clr == new_clr) return;
-
-            while (pixel.Count > 0)
+            Queue<Point> q = new Queue<Point>();
+            Color targetColor = bmp.GetPixel(pt.X, pt.Y);
+            q.Enqueue(pt);
+            while (q.Count > 0)
             {
-                Point pt = (Point)pixel.Pop();
-                if(pt.X >0 && pt.Y > 0 && pt.X < bm.Width-1 && pt.Y < bm.Height-1)
+                Point n = q.Dequeue();
+                if (!ColorMatch(bmp.GetPixel(n.X, n.Y),targetColor))
+                    continue;
+                Point w = n, e = new Point(n.X + 1, n.Y);
+                while ((w.X >= 0) && ColorMatch(bmp.GetPixel(w.X, w.Y),targetColor))
                 {
-                    validate(bm, pixel, pt.X - 1, pt.Y, old_clr, new_clr);
-                    validate(bm, pixel, pt.X, pt.Y - 1, old_clr, new_clr);
-                    validate(bm, pixel, pt.X + 1, pt.Y, old_clr, new_clr);
-                    validate(bm, pixel, pt.X, pt.Y + 1, old_clr, new_clr);
+                    bmp.SetPixel(w.X, w.Y, replacementColor);
+                    if ((w.Y > 0) && ColorMatch(bmp.GetPixel(w.X, w.Y - 1),targetColor))
+                        q.Enqueue(new Point(w.X, w.Y - 1));
+                    if ((w.Y < bmp.Height - 1) && ColorMatch(bmp.GetPixel(w.X, w.Y + 1),targetColor))
+                        q.Enqueue(new Point(w.X, w.Y + 1));
+                    w.X--;
+                }
+                while ((e.X <= bmp.Width - 1) && ColorMatch(bmp.GetPixel(e.X, e.Y),targetColor))
+                {
+                    bmp.SetPixel(e.X, e.Y, replacementColor);
+                    if ((e.Y > 0) && ColorMatch(bmp.GetPixel(e.X, e.Y - 1), targetColor))
+                        q.Enqueue(new Point(e.X, e.Y - 1));
+                    if ((e.Y < bmp.Height - 1) && ColorMatch(bmp.GetPixel(e.X, e.Y + 1), targetColor))
+                        q.Enqueue(new Point(e.X, e.Y + 1));
+                    e.X++;
                 }
             }
         }
