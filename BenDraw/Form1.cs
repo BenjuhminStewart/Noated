@@ -104,7 +104,10 @@ namespace BenDraw
                 //FloodFill(bm, pt, currColor);
                 // FloodFillDP(bm, pt.X, pt.Y, currColor);
                 FloodFillFastDP(bm, pt.X, pt.Y, currColor);
+                //ReplaceAll(bm, pt.X, pt.Y, currColor);
+                pic.Refresh();
             }
+
 
         }
 
