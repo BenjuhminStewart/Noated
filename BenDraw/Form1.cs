@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -101,7 +102,8 @@ namespace BenDraw
 
                 Point pt = set_point(pic, e.Location);
                 //FloodFill(bm, pt, currColor);
-                FloodFillDP(bm, pt.X, pt.Y, currColor);
+                // FloodFillDP(bm, pt.X, pt.Y, currColor);
+                FloodFillFastDP(bm, pt.X, pt.Y, currColor);
             }
 
         }
@@ -647,8 +649,9 @@ namespace BenDraw
         {
             int n = bm.Width;
             int m = bm.Height;
-            Color replacedColor = bm.GetPixel(x, y);
-            int count = 0;
+            var rect = new Rectangle(0, 0, n, m);
+            var bmpData = bm.LockBits(rect, ImageLockMode.ReadWrite, bm.PixelFormat);
+            Color replacedColor = GetPixel(bmpData, x, y);
             int[,] visited = new int[n, m];
 
             Queue<Tuple<int, int>> queue = new Queue<Tuple<int, int>>();
@@ -664,14 +667,14 @@ namespace BenDraw
                     continue;
                 }
 
-                bm.SetPixel(px, py, fill);
+                SetPixel(bmpData, px, py, fill);
                 visited[px, py] = 1;
 
                 // Fill Above
 
                 if (validate(px + 1, py, n, m) == 1
                     && visited[px + 1, py] == 0
-                    && bm.GetPixel(px + 1, py) == replacedColor)
+                    && GetPixel(bmpData, px + 1, py) == replacedColor)
                 {
                     queue.Enqueue(new Tuple<int, int>(px + 1, py));
 
@@ -680,7 +683,7 @@ namespace BenDraw
                 // Fill Right
                 if (validate(px, py + 1, n, m) == 1
                     && visited[px, py + 1] == 0
-                    && bm.GetPixel(px, py + 1) == replacedColor)
+                    && GetPixel(bmpData, px, py + 1) == replacedColor)
                 {
                     queue.Enqueue(new Tuple<int, int>(px, py + 1));
 
@@ -689,7 +692,7 @@ namespace BenDraw
                 // Fill Left
                 if (validate(px, py - 1, n, m) == 1
                     && visited[px, py - 1] == 0
-                    && bm.GetPixel(px, py - 1) == replacedColor)
+                    && GetPixel(bmpData, px, py - 1) == replacedColor)
                 {
                     queue.Enqueue(new Tuple<int, int>(px, py - 1));
 
@@ -698,19 +701,81 @@ namespace BenDraw
                 // Fill Below
                 if (validate(px - 1, py, n, m) == 1
                     && visited[px - 1, py] == 0
-                    && bm.GetPixel(px - 1, py) == replacedColor)
+                    && GetPixel(bmpData, px - 1, py) == replacedColor)
                 {
                     queue.Enqueue(new Tuple<int, int>(px - 1, py));
 
                 }
-
-                if (count % 10000 == 0)
-                {
-
-                    pic.Refresh();
-                }
-                count++;
             }
         }
+
+      unsafe Color GetPixel(BitmapData bmpD, int x, int y)
+      {
+        var intPtr = (byte*)bmpD.Scan0 +(y * bmpD.Stride) + (x * 4);// first ARGB
+        return Color.FromArgb(intPtr[3], intPtr[2], intPtr[1], intPtr[0]);
+      }
+
+      unsafe void SetPixel(BitmapData bmpD, int x, int y, Color color)
+      {
+        var intPtr = (byte*) bmpD.Scan0 +(y * bmpD.Stride) + (x*4);// first ARGB
+        intPtr[0] = color.B;
+        intPtr[1] = color.G;
+        intPtr[2] = color.R;
+        intPtr[3] = color.A;
+      }
+      void ReplaceAll(Bitmap bm, int x, int y, Color fill){
+        int n = bm.Width;
+        int m = bm.Height;
+        var rect = new Rectangle(0, 0, n, m);
+        var bmpData = bm.LockBits(rect, ImageLockMode.ReadWrite, bm.PixelFormat);
+        Color replacedColor = GetPixel(bmpData, x, y);
+        Parallel.For(0, m, (int i) => {
+            for(int j = 0; j < n; j++){
+              if(GetPixel(bmpData, j, i) == replacedColor){
+                SetPixel(bmpData, j, i, fill);
+              }
+          }
+        });
+        bm.UnlockBits(bmpData);
+      }
+      void FloodFillFastDP(Bitmap bm, int x, int y, Color fill)
+      {
+        int n = bm.Width;
+        int m = bm.Height;
+        var visited = new bool[n, m];
+        var bmpData = bm.LockBits(new Rectangle(0, 0, n, m), ImageLockMode.ReadWrite, bm.PixelFormat);
+        Color replacedColor = GetPixel(bmpData, x, y);
+        if(fill == replacedColor){
+            bm.UnlockBits(bmpData);
+            return;
+        }
+        Queue<Tuple<int, int>> queue = new Queue<Tuple<int, int>>();
+        queue.Enqueue(new Tuple<int, int>(x, y));
+
+        while (queue.Count > 0)
+        {
+          Tuple<int, int> coord = queue.Dequeue();
+          int px = coord.Item1;
+          int py = coord.Item2;
+          if (visited[px, py])
+          {
+            continue;
+          }
+
+          SetPixel(bmpData, px, py, fill);
+          visited[px, py] = true;
+            
+            for (int i = Math.Max(0, py - 1); i <= Math.Min(m - 1, py + 1); i++)
+            {
+                for (int j = Math.Max(0, px - 1); j <= Math.Min(n -1, px + 1); j++)
+                {
+                    if(!visited[j, i] && GetPixel(bmpData, j, i) == replacedColor){
+                        queue.Enqueue(new Tuple<int, int>(j, i));
+                    }
+                }
+            }
+        }
+        bm.UnlockBits(bmpData);
+      }
     }
 }
