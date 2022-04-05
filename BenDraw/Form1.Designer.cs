@@ -32,6 +32,7 @@ namespace BenDraw
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pic_color = new System.Windows.Forms.Panel();
             this.panel_backdrop = new System.Windows.Forms.Panel();
+            this.color_picker_2 = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.btn_line = new System.Windows.Forms.Button();
             this.btn_save = new System.Windows.Forms.Button();
@@ -47,14 +48,13 @@ namespace BenDraw
             this.btn_eraser = new System.Windows.Forms.Button();
             this.panel_lower = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
-            
             this.pic_color.SuspendLayout();
             this.panel_backdrop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.color_picker_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
-            
             this.SuspendLayout();
             // 
             // pic_color
@@ -69,6 +69,7 @@ namespace BenDraw
             // 
             // panel_backdrop
             // 
+            this.panel_backdrop.Controls.Add(this.color_picker_2);
             this.panel_backdrop.Controls.Add(this.trackBar1);
             this.panel_backdrop.Controls.Add(this.btn_line);
             this.panel_backdrop.Controls.Add(this.btn_save);
@@ -87,10 +88,26 @@ namespace BenDraw
             this.panel_backdrop.Name = "panel_backdrop";
             this.panel_backdrop.Size = new System.Drawing.Size(1554, 128);
             this.panel_backdrop.TabIndex = 8;
+            this.panel_backdrop.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel_KeyDown);
+            // 
+            // color_picker_2
+            // 
+            this.color_picker_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.color_picker_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.color_picker_2.Image = ((System.Drawing.Image)(resources.GetObject("color_picker_2.Image")));
+            this.color_picker_2.Location = new System.Drawing.Point(266, 12);
+            this.color_picker_2.Name = "color_picker_2";
+            this.color_picker_2.Size = new System.Drawing.Size(99, 93);
+            this.color_picker_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.color_picker_2.TabIndex = 9;
+            this.color_picker_2.TabStop = false;
+            this.color_picker_2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cp_MouseDown);
+            this.color_picker_2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cp_MouseMove);
+            this.color_picker_2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cp_MouseUp);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(200, 83);
+            this.trackBar1.Location = new System.Drawing.Point(439, 76);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
@@ -99,6 +116,7 @@ namespace BenDraw
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Value = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackbar_thickness);
+            this.trackBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_line
             // 
@@ -113,7 +131,7 @@ namespace BenDraw
             this.btn_line.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_line.Image = global::BenDraw.Properties.Resources.line_small;
             this.btn_line.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_line.Location = new System.Drawing.Point(626, 13);
+            this.btn_line.Location = new System.Drawing.Point(865, 6);
             this.btn_line.Name = "btn_line";
             this.btn_line.Size = new System.Drawing.Size(57, 62);
             this.btn_line.TabIndex = 7;
@@ -121,6 +139,7 @@ namespace BenDraw
             this.btn_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_line.UseVisualStyleBackColor = false;
             this.btn_line.Click += new System.EventHandler(this.btn_line_Click);
+            this.btn_line.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_save
             // 
@@ -133,7 +152,7 @@ namespace BenDraw
             this.btn_save.ForeColor = System.Drawing.Color.White;
             this.btn_save.Image = global::BenDraw.Properties.Resources.save;
             this.btn_save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_save.Location = new System.Drawing.Point(689, 13);
+            this.btn_save.Location = new System.Drawing.Point(928, 6);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(77, 61);
             this.btn_save.TabIndex = 6;
@@ -141,6 +160,7 @@ namespace BenDraw
             this.btn_save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            this.btn_save.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_pencil
             // 
@@ -155,7 +175,7 @@ namespace BenDraw
             this.btn_pencil.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_pencil.Image = global::BenDraw.Properties.Resources.pen_small;
             this.btn_pencil.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_pencil.Location = new System.Drawing.Point(327, 12);
+            this.btn_pencil.Location = new System.Drawing.Point(566, 5);
             this.btn_pencil.Name = "btn_pencil";
             this.btn_pencil.Size = new System.Drawing.Size(57, 62);
             this.btn_pencil.TabIndex = 3;
@@ -163,6 +183,7 @@ namespace BenDraw
             this.btn_pencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_pencil.UseVisualStyleBackColor = false;
             this.btn_pencil.Click += new System.EventHandler(this.btn_pencil_Click);
+            this.btn_pencil.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_trash
             // 
@@ -176,7 +197,7 @@ namespace BenDraw
             this.btn_trash.ForeColor = System.Drawing.Color.White;
             this.btn_trash.Image = global::BenDraw.Properties.Resources.trash1;
             this.btn_trash.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_trash.Location = new System.Drawing.Point(772, 13);
+            this.btn_trash.Location = new System.Drawing.Point(1011, 6);
             this.btn_trash.Name = "btn_trash";
             this.btn_trash.Size = new System.Drawing.Size(55, 62);
             this.btn_trash.TabIndex = 5;
@@ -184,6 +205,7 @@ namespace BenDraw
             this.btn_trash.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_trash.UseVisualStyleBackColor = true;
             this.btn_trash.Click += new System.EventHandler(this.btn_trash_Click);
+            this.btn_trash.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_rect
             // 
@@ -198,7 +220,7 @@ namespace BenDraw
             this.btn_rect.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_rect.Image = global::BenDraw.Properties.Resources.frame_small;
             this.btn_rect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_rect.Location = new System.Drawing.Point(536, 12);
+            this.btn_rect.Location = new System.Drawing.Point(775, 5);
             this.btn_rect.Name = "btn_rect";
             this.btn_rect.Size = new System.Drawing.Size(84, 62);
             this.btn_rect.TabIndex = 6;
@@ -206,6 +228,7 @@ namespace BenDraw
             this.btn_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_rect.UseVisualStyleBackColor = false;
             this.btn_rect.Click += new System.EventHandler(this.btn_rect_Click);
+            this.btn_rect.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_color
             // 
@@ -220,7 +243,7 @@ namespace BenDraw
             this.btn_color.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_color.Image = ((System.Drawing.Image)(resources.GetObject("btn_color.Image")));
             this.btn_color.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_color.Location = new System.Drawing.Point(200, 12);
+            this.btn_color.Location = new System.Drawing.Point(439, 5);
             this.btn_color.Name = "btn_color";
             this.btn_color.Size = new System.Drawing.Size(57, 62);
             this.btn_color.TabIndex = 1;
@@ -228,15 +251,16 @@ namespace BenDraw
             this.btn_color.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_color.UseVisualStyleBackColor = false;
             this.btn_color.Click += new System.EventHandler(this.btn_color_Click);
+            this.btn_color.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // color_picker
             // 
             this.color_picker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.color_picker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.color_picker.Image = ((System.Drawing.Image)(resources.GetObject("color_picker.Image")));
-            this.color_picker.Location = new System.Drawing.Point(12, 13);
+            this.color_picker.Image = global::BenDraw.Properties.Resources.color_picker;
+            this.color_picker.Location = new System.Drawing.Point(12, 4);
             this.color_picker.Name = "color_picker";
-            this.color_picker.Size = new System.Drawing.Size(114, 100);
+            this.color_picker.Size = new System.Drawing.Size(246, 115);
             this.color_picker.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.color_picker.TabIndex = 4;
             this.color_picker.TabStop = false;
@@ -257,7 +281,7 @@ namespace BenDraw
             this.btn_fill.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_fill.Image = global::BenDraw.Properties.Resources.paint_bucket_small;
             this.btn_fill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_fill.Location = new System.Drawing.Point(264, 12);
+            this.btn_fill.Location = new System.Drawing.Point(503, 5);
             this.btn_fill.Name = "btn_fill";
             this.btn_fill.Size = new System.Drawing.Size(57, 62);
             this.btn_fill.TabIndex = 2;
@@ -265,14 +289,15 @@ namespace BenDraw
             this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_fill.UseVisualStyleBackColor = false;
             this.btn_fill.Click += new System.EventHandler(this.btn_fill_Click);
+            this.btn_fill.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // btn_show_color
             // 
             this.btn_show_color.BackColor = System.Drawing.Color.Black;
             this.btn_show_color.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.btn_show_color.Location = new System.Drawing.Point(132, 13);
+            this.btn_show_color.Location = new System.Drawing.Point(371, 5);
             this.btn_show_color.Name = "btn_show_color";
-            this.btn_show_color.Size = new System.Drawing.Size(62, 100);
+            this.btn_show_color.Size = new System.Drawing.Size(62, 114);
             this.btn_show_color.TabIndex = 1;
             // 
             // btn_ellipse
@@ -288,7 +313,7 @@ namespace BenDraw
             this.btn_ellipse.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_ellipse.Image = global::BenDraw.Properties.Resources.circle_small;
             this.btn_ellipse.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_ellipse.Location = new System.Drawing.Point(453, 12);
+            this.btn_ellipse.Location = new System.Drawing.Point(692, 5);
             this.btn_ellipse.Name = "btn_ellipse";
             this.btn_ellipse.Size = new System.Drawing.Size(77, 62);
             this.btn_ellipse.TabIndex = 5;
@@ -296,10 +321,11 @@ namespace BenDraw
             this.btn_ellipse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_ellipse.UseVisualStyleBackColor = false;
             this.btn_ellipse.Click += new System.EventHandler(this.btn_ellipse_Click);
+            this.btn_ellipse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // numericUpDown
             // 
-            this.numericUpDown.Location = new System.Drawing.Point(772, 81);
+            this.numericUpDown.Location = new System.Drawing.Point(1011, 74);
             this.numericUpDown.Name = "numericUpDown";
             this.numericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.numericUpDown.Size = new System.Drawing.Size(44, 23);
@@ -325,7 +351,7 @@ namespace BenDraw
             this.btn_eraser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btn_eraser.Image = global::BenDraw.Properties.Resources.eraser_small;
             this.btn_eraser.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_eraser.Location = new System.Drawing.Point(390, 12);
+            this.btn_eraser.Location = new System.Drawing.Point(629, 5);
             this.btn_eraser.Name = "btn_eraser";
             this.btn_eraser.Size = new System.Drawing.Size(57, 62);
             this.btn_eraser.TabIndex = 4;
@@ -333,6 +359,7 @@ namespace BenDraw
             this.btn_eraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_eraser.UseVisualStyleBackColor = false;
             this.btn_eraser.Click += new System.EventHandler(this.btn_eraser_Click);
+            this.btn_eraser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
             // panel_lower
             // 
@@ -373,6 +400,7 @@ namespace BenDraw
             this.pic_color.ResumeLayout(false);
             this.panel_backdrop.ResumeLayout(false);
             this.panel_backdrop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.color_picker_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
@@ -400,7 +428,7 @@ namespace BenDraw
         private System.Windows.Forms.Button btn_trash;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.TrackBar trackBar1;
-       
+        private System.Windows.Forms.PictureBox color_picker_2;
     }
 }
 
