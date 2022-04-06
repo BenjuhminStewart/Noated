@@ -124,13 +124,13 @@ namespace BenDraw
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(222, 79);
+            this.trackBar1.Location = new System.Drawing.Point(222, 71);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(524, 45);
+            this.trackBar1.Size = new System.Drawing.Size(555, 45);
             this.trackBar1.TabIndex = 8;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trackBar1.Value = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackbar_thickness);
             this.trackBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
@@ -147,12 +147,10 @@ namespace BenDraw
             this.btn_line.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_line.ForeColor = System.Drawing.Color.Black;
             this.btn_line.Image = ((System.Drawing.Image)(resources.GetObject("btn_line.Image")));
-            this.btn_line.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_line.Location = new System.Drawing.Point(634, 4);
+            this.btn_line.Location = new System.Drawing.Point(601, 10);
             this.btn_line.Name = "btn_line";
-            this.btn_line.Size = new System.Drawing.Size(57, 62);
+            this.btn_line.Size = new System.Drawing.Size(50, 50);
             this.btn_line.TabIndex = 7;
-            this.btn_line.Text = "Line";
             this.btn_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_line.UseVisualStyleBackColor = false;
             this.btn_line.Click += new System.EventHandler(this.btn_line_Click);
@@ -169,12 +167,10 @@ namespace BenDraw
             this.btn_save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_save.ForeColor = System.Drawing.Color.Black;
             this.btn_save.Image = ((System.Drawing.Image)(resources.GetObject("btn_save.Image")));
-            this.btn_save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_save.Location = new System.Drawing.Point(697, 4);
+            this.btn_save.Location = new System.Drawing.Point(664, 10);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(62, 61);
+            this.btn_save.Size = new System.Drawing.Size(50, 50);
             this.btn_save.TabIndex = 6;
-            this.btn_save.Text = "Save";
             this.btn_save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_save.UseVisualStyleBackColor = false;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -192,12 +188,10 @@ namespace BenDraw
             this.btn_pencil.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_pencil.ForeColor = System.Drawing.Color.Black;
             this.btn_pencil.Image = ((System.Drawing.Image)(resources.GetObject("btn_pencil.Image")));
-            this.btn_pencil.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_pencil.Location = new System.Drawing.Point(349, 3);
+            this.btn_pencil.Location = new System.Drawing.Point(349, 9);
             this.btn_pencil.Name = "btn_pencil";
-            this.btn_pencil.Size = new System.Drawing.Size(57, 62);
+            this.btn_pencil.Size = new System.Drawing.Size(50, 50);
             this.btn_pencil.TabIndex = 3;
-            this.btn_pencil.Text = "Brush";
             this.btn_pencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_pencil.UseVisualStyleBackColor = false;
             this.btn_pencil.Click += new System.EventHandler(this.btn_pencil_Click);
@@ -214,12 +208,10 @@ namespace BenDraw
             this.btn_trash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_trash.ForeColor = System.Drawing.Color.Black;
             this.btn_trash.Image = ((System.Drawing.Image)(resources.GetObject("btn_trash.Image")));
-            this.btn_trash.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_trash.Location = new System.Drawing.Point(765, 5);
+            this.btn_trash.Location = new System.Drawing.Point(727, 11);
             this.btn_trash.Name = "btn_trash";
-            this.btn_trash.Size = new System.Drawing.Size(55, 62);
+            this.btn_trash.Size = new System.Drawing.Size(50, 50);
             this.btn_trash.TabIndex = 5;
-            this.btn_trash.Text = "Clear";
             this.btn_trash.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_trash.UseVisualStyleBackColor = true;
             this.btn_trash.Click += new System.EventHandler(this.btn_trash_Click);
@@ -237,12 +229,10 @@ namespace BenDraw
             this.btn_rect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_rect.ForeColor = System.Drawing.Color.Black;
             this.btn_rect.Image = ((System.Drawing.Image)(resources.GetObject("btn_rect.Image")));
-            this.btn_rect.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_rect.Location = new System.Drawing.Point(558, 3);
+            this.btn_rect.Location = new System.Drawing.Point(538, 9);
             this.btn_rect.Name = "btn_rect";
-            this.btn_rect.Size = new System.Drawing.Size(70, 62);
+            this.btn_rect.Size = new System.Drawing.Size(50, 50);
             this.btn_rect.TabIndex = 6;
-            this.btn_rect.Text = "Rectangle";
             this.btn_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_rect.UseVisualStyleBackColor = false;
             this.btn_rect.Click += new System.EventHandler(this.btn_rect_Click);
@@ -254,18 +244,16 @@ namespace BenDraw
             this.btn_color.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btn_color.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_color.FlatAppearance.BorderSize = 0;
-            this.btn_color.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.btn_color.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.btn_color.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.btn_color.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btn_color.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_color.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_color.ForeColor = System.Drawing.Color.Black;
             this.btn_color.Image = ((System.Drawing.Image)(resources.GetObject("btn_color.Image")));
-            this.btn_color.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_color.Location = new System.Drawing.Point(222, 3);
+            this.btn_color.Location = new System.Drawing.Point(222, 9);
             this.btn_color.Name = "btn_color";
-            this.btn_color.Size = new System.Drawing.Size(57, 62);
+            this.btn_color.Size = new System.Drawing.Size(50, 50);
             this.btn_color.TabIndex = 1;
-            this.btn_color.Text = "Color";
             this.btn_color.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_color.UseVisualStyleBackColor = false;
             this.btn_color.Click += new System.EventHandler(this.btn_color_Click);
@@ -298,12 +286,10 @@ namespace BenDraw
             this.btn_fill.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_fill.ForeColor = System.Drawing.Color.Black;
             this.btn_fill.Image = ((System.Drawing.Image)(resources.GetObject("btn_fill.Image")));
-            this.btn_fill.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_fill.Location = new System.Drawing.Point(286, 3);
+            this.btn_fill.Location = new System.Drawing.Point(286, 9);
             this.btn_fill.Name = "btn_fill";
-            this.btn_fill.Size = new System.Drawing.Size(57, 62);
+            this.btn_fill.Size = new System.Drawing.Size(50, 50);
             this.btn_fill.TabIndex = 2;
-            this.btn_fill.Text = "Fill";
             this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_fill.UseVisualStyleBackColor = false;
             this.btn_fill.Click += new System.EventHandler(this.btn_fill_Click);
@@ -330,12 +316,10 @@ namespace BenDraw
             this.btn_ellipse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ellipse.ForeColor = System.Drawing.Color.Black;
             this.btn_ellipse.Image = ((System.Drawing.Image)(resources.GetObject("btn_ellipse.Image")));
-            this.btn_ellipse.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_ellipse.Location = new System.Drawing.Point(475, 3);
+            this.btn_ellipse.Location = new System.Drawing.Point(475, 9);
             this.btn_ellipse.Name = "btn_ellipse";
-            this.btn_ellipse.Size = new System.Drawing.Size(77, 62);
+            this.btn_ellipse.Size = new System.Drawing.Size(50, 50);
             this.btn_ellipse.TabIndex = 5;
-            this.btn_ellipse.Text = "Ellipse";
             this.btn_ellipse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_ellipse.UseVisualStyleBackColor = false;
             this.btn_ellipse.Click += new System.EventHandler(this.btn_ellipse_Click);
@@ -343,7 +327,7 @@ namespace BenDraw
             // 
             // numericUpDown
             // 
-            this.numericUpDown.Location = new System.Drawing.Point(765, 79);
+            this.numericUpDown.Location = new System.Drawing.Point(786, 79);
             this.numericUpDown.Name = "numericUpDown";
             this.numericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.numericUpDown.Size = new System.Drawing.Size(44, 23);
@@ -369,12 +353,10 @@ namespace BenDraw
             this.btn_eraser.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_eraser.ForeColor = System.Drawing.Color.Black;
             this.btn_eraser.Image = ((System.Drawing.Image)(resources.GetObject("btn_eraser.Image")));
-            this.btn_eraser.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_eraser.Location = new System.Drawing.Point(412, 3);
+            this.btn_eraser.Location = new System.Drawing.Point(412, 9);
             this.btn_eraser.Name = "btn_eraser";
-            this.btn_eraser.Size = new System.Drawing.Size(57, 62);
+            this.btn_eraser.Size = new System.Drawing.Size(50, 50);
             this.btn_eraser.TabIndex = 4;
-            this.btn_eraser.Text = "Eraser";
             this.btn_eraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_eraser.UseVisualStyleBackColor = false;
             this.btn_eraser.Click += new System.EventHandler(this.btn_eraser_Click);
