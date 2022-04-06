@@ -105,6 +105,7 @@ namespace BenDraw
                 // FloodFillDP(bm, pt.X, pt.Y, currColor);
                 // FloodFillFastDP(bm, pt.X, pt.Y, currColor);
                 MyFill(bm, pt.X, pt.Y, currColor);
+                pic.Refresh();
             }
 
 
