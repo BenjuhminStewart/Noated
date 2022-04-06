@@ -32,6 +32,16 @@ namespace BenDraw
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pic_color = new System.Windows.Forms.Panel();
             this.panel_backdrop = new System.Windows.Forms.Panel();
+            this.penThicknessLabel = new System.Windows.Forms.Label();
+            this.B_Value = new System.Windows.Forms.TrackBar();
+            this.G_Value = new System.Windows.Forms.TrackBar();
+            this.R_Value = new System.Windows.Forms.TrackBar();
+            this.A_Value = new System.Windows.Forms.TrackBar();
+            this.colorDropper = new System.Windows.Forms.Button();
+            this.A_Label = new System.Windows.Forms.Label();
+            this.B_Label = new System.Windows.Forms.Label();
+            this.G_Label = new System.Windows.Forms.Label();
+            this.R_Label = new System.Windows.Forms.Label();
             this.btn_WhiteCircle = new BenDraw.Components.RoundButton();
             this.btn_BlackCircle = new BenDraw.Components.RoundButton();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -45,15 +55,17 @@ namespace BenDraw
             this.btn_fill = new System.Windows.Forms.Button();
             this.btn_show_color = new System.Windows.Forms.Panel();
             this.btn_ellipse = new System.Windows.Forms.Button();
-            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.btn_eraser = new System.Windows.Forms.Button();
             this.panel_lower = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
             this.pic_color.SuspendLayout();
             this.panel_backdrop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.B_Value)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.G_Value)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.R_Value)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.A_Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +82,16 @@ namespace BenDraw
             // panel_backdrop
             // 
             this.panel_backdrop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel_backdrop.Controls.Add(this.penThicknessLabel);
+            this.panel_backdrop.Controls.Add(this.B_Value);
+            this.panel_backdrop.Controls.Add(this.G_Value);
+            this.panel_backdrop.Controls.Add(this.R_Value);
+            this.panel_backdrop.Controls.Add(this.A_Value);
+            this.panel_backdrop.Controls.Add(this.colorDropper);
+            this.panel_backdrop.Controls.Add(this.A_Label);
+            this.panel_backdrop.Controls.Add(this.B_Label);
+            this.panel_backdrop.Controls.Add(this.G_Label);
+            this.panel_backdrop.Controls.Add(this.R_Label);
             this.panel_backdrop.Controls.Add(this.btn_WhiteCircle);
             this.panel_backdrop.Controls.Add(this.btn_BlackCircle);
             this.panel_backdrop.Controls.Add(this.trackBar1);
@@ -83,13 +105,130 @@ namespace BenDraw
             this.panel_backdrop.Controls.Add(this.btn_fill);
             this.panel_backdrop.Controls.Add(this.btn_show_color);
             this.panel_backdrop.Controls.Add(this.btn_ellipse);
-            this.panel_backdrop.Controls.Add(this.numericUpDown);
             this.panel_backdrop.Controls.Add(this.btn_eraser);
             this.panel_backdrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_backdrop.Location = new System.Drawing.Point(0, 0);
+            this.panel_backdrop.MinimumSize = new System.Drawing.Size(10, 5);
             this.panel_backdrop.Name = "panel_backdrop";
             this.panel_backdrop.Size = new System.Drawing.Size(1554, 128);
             this.panel_backdrop.TabIndex = 8;
+            // 
+            // penThicknessLabel
+            // 
+            this.penThicknessLabel.AutoSize = true;
+            this.penThicknessLabel.Location = new System.Drawing.Point(792, 95);
+            this.penThicknessLabel.Name = "penThicknessLabel";
+            this.penThicknessLabel.Size = new System.Drawing.Size(0, 15);
+            this.penThicknessLabel.TabIndex = 24;
+            // 
+            // B_Value
+            // 
+            this.B_Value.Location = new System.Drawing.Point(279, 95);
+            this.B_Value.Maximum = 255;
+            this.B_Value.Name = "B_Value";
+            this.B_Value.Size = new System.Drawing.Size(176, 45);
+            this.B_Value.TabIndex = 23;
+            this.B_Value.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.B_Value.ValueChanged += new System.EventHandler(this.ARGB_Changed);
+            // 
+            // G_Value
+            // 
+            this.G_Value.Location = new System.Drawing.Point(279, 67);
+            this.G_Value.Maximum = 255;
+            this.G_Value.Name = "G_Value";
+            this.G_Value.Size = new System.Drawing.Size(176, 45);
+            this.G_Value.TabIndex = 22;
+            this.G_Value.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.G_Value.ValueChanged += new System.EventHandler(this.ARGB_Changed);
+            // 
+            // R_Value
+            // 
+            this.R_Value.Location = new System.Drawing.Point(279, 37);
+            this.R_Value.Maximum = 255;
+            this.R_Value.Name = "R_Value";
+            this.R_Value.Size = new System.Drawing.Size(176, 45);
+            this.R_Value.TabIndex = 21;
+            this.R_Value.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.R_Value.ValueChanged += new System.EventHandler(this.ARGB_Changed);
+            // 
+            // A_Value
+            // 
+            this.A_Value.Location = new System.Drawing.Point(279, 6);
+            this.A_Value.Maximum = 255;
+            this.A_Value.Name = "A_Value";
+            this.A_Value.Size = new System.Drawing.Size(176, 45);
+            this.A_Value.TabIndex = 20;
+            this.A_Value.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.A_Value.ValueChanged += new System.EventHandler(this.ARGB_Changed);
+            // 
+            // colorDropper
+            // 
+            this.colorDropper.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.colorDropper.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.colorDropper.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.colorDropper.FlatAppearance.BorderSize = 0;
+            this.colorDropper.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.colorDropper.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.colorDropper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colorDropper.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.colorDropper.ForeColor = System.Drawing.Color.Black;
+            this.colorDropper.Image = ((System.Drawing.Image)(resources.GetObject("colorDropper.Image")));
+            this.colorDropper.Location = new System.Drawing.Point(694, 47);
+            this.colorDropper.Name = "colorDropper";
+            this.colorDropper.Size = new System.Drawing.Size(40, 40);
+            this.colorDropper.TabIndex = 15;
+            this.colorDropper.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.colorDropper.UseVisualStyleBackColor = false;
+            this.colorDropper.Click += new System.EventHandler(this.SelectColorDropper);
+            // 
+            // A_Label
+            // 
+            this.A_Label.AutoSize = true;
+            this.A_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.A_Label.Location = new System.Drawing.Point(228, 9);
+            this.A_Label.MinimumSize = new System.Drawing.Size(10, 5);
+            this.A_Label.Name = "A_Label";
+            this.A_Label.Size = new System.Drawing.Size(28, 15);
+            this.A_Label.TabIndex = 14;
+            this.A_Label.Text = "A: ";
+            this.A_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // B_Label
+            // 
+            this.B_Label.AutoSize = true;
+            this.B_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.B_Label.Location = new System.Drawing.Point(229, 98);
+            this.B_Label.MinimumSize = new System.Drawing.Size(10, 5);
+            this.B_Label.Name = "B_Label";
+            this.B_Label.Size = new System.Drawing.Size(28, 15);
+            this.B_Label.TabIndex = 13;
+            this.B_Label.Text = "B: ";
+            this.B_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // G_Label
+            // 
+            this.G_Label.AutoSize = true;
+            this.G_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.G_Label.Location = new System.Drawing.Point(229, 68);
+            this.G_Label.MinimumSize = new System.Drawing.Size(10, 5);
+            this.G_Label.Name = "G_Label";
+            this.G_Label.Size = new System.Drawing.Size(28, 15);
+            this.G_Label.TabIndex = 12;
+            this.G_Label.Text = "G: ";
+            this.G_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // R_Label
+            // 
+            this.R_Label.AutoSize = true;
+            this.R_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.R_Label.Location = new System.Drawing.Point(229, 38);
+            this.R_Label.MinimumSize = new System.Drawing.Size(10, 5);
+            this.R_Label.Name = "R_Label";
+            this.R_Label.Size = new System.Drawing.Size(28, 15);
+            this.R_Label.TabIndex = 11;
+            this.R_Label.Text = "R: ";
+            this.R_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.R_Label.Click += new System.EventHandler(this.R_Label_Click);
             // 
             // btn_WhiteCircle
             // 
@@ -98,7 +237,7 @@ namespace BenDraw
             this.btn_WhiteCircle.FlatAppearance.BorderSize = 0;
             this.btn_WhiteCircle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_WhiteCircle.Image = ((System.Drawing.Image)(resources.GetObject("btn_WhiteCircle.Image")));
-            this.btn_WhiteCircle.Location = new System.Drawing.Point(161, 61);
+            this.btn_WhiteCircle.Location = new System.Drawing.Point(462, 60);
             this.btn_WhiteCircle.Name = "btn_WhiteCircle";
             this.btn_WhiteCircle.Size = new System.Drawing.Size(55, 55);
             this.btn_WhiteCircle.TabIndex = 10;
@@ -115,7 +254,7 @@ namespace BenDraw
             this.btn_BlackCircle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btn_BlackCircle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_BlackCircle.Image = ((System.Drawing.Image)(resources.GetObject("btn_BlackCircle.Image")));
-            this.btn_BlackCircle.Location = new System.Drawing.Point(161, 4);
+            this.btn_BlackCircle.Location = new System.Drawing.Point(462, 3);
             this.btn_BlackCircle.Name = "btn_BlackCircle";
             this.btn_BlackCircle.Size = new System.Drawing.Size(55, 55);
             this.btn_BlackCircle.TabIndex = 9;
@@ -124,13 +263,13 @@ namespace BenDraw
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(222, 71);
+            this.trackBar1.Location = new System.Drawing.Point(523, 93);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(555, 45);
+            this.trackBar1.Size = new System.Drawing.Size(262, 45);
             this.trackBar1.TabIndex = 8;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Value = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackbar_thickness);
             this.trackBar1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
@@ -147,9 +286,9 @@ namespace BenDraw
             this.btn_line.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_line.ForeColor = System.Drawing.Color.Black;
             this.btn_line.Image = ((System.Drawing.Image)(resources.GetObject("btn_line.Image")));
-            this.btn_line.Location = new System.Drawing.Point(601, 10);
+            this.btn_line.Location = new System.Drawing.Point(694, 3);
             this.btn_line.Name = "btn_line";
-            this.btn_line.Size = new System.Drawing.Size(50, 50);
+            this.btn_line.Size = new System.Drawing.Size(40, 40);
             this.btn_line.TabIndex = 7;
             this.btn_line.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_line.UseVisualStyleBackColor = false;
@@ -167,9 +306,9 @@ namespace BenDraw
             this.btn_save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_save.ForeColor = System.Drawing.Color.Black;
             this.btn_save.Image = ((System.Drawing.Image)(resources.GetObject("btn_save.Image")));
-            this.btn_save.Location = new System.Drawing.Point(664, 10);
+            this.btn_save.Location = new System.Drawing.Point(745, 3);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(50, 50);
+            this.btn_save.Size = new System.Drawing.Size(40, 40);
             this.btn_save.TabIndex = 6;
             this.btn_save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_save.UseVisualStyleBackColor = false;
@@ -188,9 +327,9 @@ namespace BenDraw
             this.btn_pencil.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_pencil.ForeColor = System.Drawing.Color.Black;
             this.btn_pencil.Image = ((System.Drawing.Image)(resources.GetObject("btn_pencil.Image")));
-            this.btn_pencil.Location = new System.Drawing.Point(349, 9);
+            this.btn_pencil.Location = new System.Drawing.Point(582, 6);
             this.btn_pencil.Name = "btn_pencil";
-            this.btn_pencil.Size = new System.Drawing.Size(50, 50);
+            this.btn_pencil.Size = new System.Drawing.Size(40, 40);
             this.btn_pencil.TabIndex = 3;
             this.btn_pencil.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_pencil.UseVisualStyleBackColor = false;
@@ -208,9 +347,9 @@ namespace BenDraw
             this.btn_trash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_trash.ForeColor = System.Drawing.Color.Black;
             this.btn_trash.Image = ((System.Drawing.Image)(resources.GetObject("btn_trash.Image")));
-            this.btn_trash.Location = new System.Drawing.Point(727, 11);
+            this.btn_trash.Location = new System.Drawing.Point(745, 47);
             this.btn_trash.Name = "btn_trash";
-            this.btn_trash.Size = new System.Drawing.Size(50, 50);
+            this.btn_trash.Size = new System.Drawing.Size(40, 40);
             this.btn_trash.TabIndex = 5;
             this.btn_trash.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_trash.UseVisualStyleBackColor = true;
@@ -229,9 +368,9 @@ namespace BenDraw
             this.btn_rect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_rect.ForeColor = System.Drawing.Color.Black;
             this.btn_rect.Image = ((System.Drawing.Image)(resources.GetObject("btn_rect.Image")));
-            this.btn_rect.Location = new System.Drawing.Point(538, 9);
+            this.btn_rect.Location = new System.Drawing.Point(641, 47);
             this.btn_rect.Name = "btn_rect";
-            this.btn_rect.Size = new System.Drawing.Size(50, 50);
+            this.btn_rect.Size = new System.Drawing.Size(40, 40);
             this.btn_rect.TabIndex = 6;
             this.btn_rect.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_rect.UseVisualStyleBackColor = false;
@@ -250,9 +389,9 @@ namespace BenDraw
             this.btn_color.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_color.ForeColor = System.Drawing.Color.Black;
             this.btn_color.Image = ((System.Drawing.Image)(resources.GetObject("btn_color.Image")));
-            this.btn_color.Location = new System.Drawing.Point(222, 9);
+            this.btn_color.Location = new System.Drawing.Point(523, 6);
             this.btn_color.Name = "btn_color";
-            this.btn_color.Size = new System.Drawing.Size(50, 50);
+            this.btn_color.Size = new System.Drawing.Size(40, 40);
             this.btn_color.TabIndex = 1;
             this.btn_color.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_color.UseVisualStyleBackColor = false;
@@ -265,9 +404,9 @@ namespace BenDraw
             this.color_picker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.color_picker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.color_picker.Image = global::BenDraw.Properties.Resources.color_picker;
-            this.color_picker.Location = new System.Drawing.Point(12, 4);
+            this.color_picker.Location = new System.Drawing.Point(12, 7);
             this.color_picker.Name = "color_picker";
-            this.color_picker.Size = new System.Drawing.Size(118, 115);
+            this.color_picker.Size = new System.Drawing.Size(189, 109);
             this.color_picker.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.color_picker.TabIndex = 4;
             this.color_picker.TabStop = false;
@@ -287,9 +426,9 @@ namespace BenDraw
             this.btn_fill.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_fill.ForeColor = System.Drawing.Color.Black;
             this.btn_fill.Image = ((System.Drawing.Image)(resources.GetObject("btn_fill.Image")));
-            this.btn_fill.Location = new System.Drawing.Point(286, 9);
+            this.btn_fill.Location = new System.Drawing.Point(523, 47);
             this.btn_fill.Name = "btn_fill";
-            this.btn_fill.Size = new System.Drawing.Size(50, 50);
+            this.btn_fill.Size = new System.Drawing.Size(40, 40);
             this.btn_fill.TabIndex = 2;
             this.btn_fill.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_fill.UseVisualStyleBackColor = false;
@@ -300,9 +439,9 @@ namespace BenDraw
             // 
             this.btn_show_color.BackColor = System.Drawing.Color.Black;
             this.btn_show_color.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.btn_show_color.Location = new System.Drawing.Point(136, 5);
+            this.btn_show_color.Location = new System.Drawing.Point(207, 7);
             this.btn_show_color.Name = "btn_show_color";
-            this.btn_show_color.Size = new System.Drawing.Size(19, 114);
+            this.btn_show_color.Size = new System.Drawing.Size(19, 109);
             this.btn_show_color.TabIndex = 1;
             // 
             // btn_ellipse
@@ -317,30 +456,14 @@ namespace BenDraw
             this.btn_ellipse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ellipse.ForeColor = System.Drawing.Color.Black;
             this.btn_ellipse.Image = ((System.Drawing.Image)(resources.GetObject("btn_ellipse.Image")));
-            this.btn_ellipse.Location = new System.Drawing.Point(475, 9);
+            this.btn_ellipse.Location = new System.Drawing.Point(641, 6);
             this.btn_ellipse.Name = "btn_ellipse";
-            this.btn_ellipse.Size = new System.Drawing.Size(50, 50);
+            this.btn_ellipse.Size = new System.Drawing.Size(40, 40);
             this.btn_ellipse.TabIndex = 5;
             this.btn_ellipse.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_ellipse.UseVisualStyleBackColor = false;
             this.btn_ellipse.Click += new System.EventHandler(this.btn_ellipse_Click);
             this.btn_ellipse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
-            // 
-            // numericUpDown
-            // 
-            this.numericUpDown.Location = new System.Drawing.Point(786, 79);
-            this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.numericUpDown.Size = new System.Drawing.Size(44, 23);
-            this.numericUpDown.TabIndex = 0;
-            this.numericUpDown.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown.Visible = false;
-            this.numericUpDown.ValueChanged += new System.EventHandler(this.Thickness_ValueChanged);
-            this.numericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Numeric_KeyDown);
             // 
             // btn_eraser
             // 
@@ -354,9 +477,9 @@ namespace BenDraw
             this.btn_eraser.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_eraser.ForeColor = System.Drawing.Color.Black;
             this.btn_eraser.Image = ((System.Drawing.Image)(resources.GetObject("btn_eraser.Image")));
-            this.btn_eraser.Location = new System.Drawing.Point(412, 9);
+            this.btn_eraser.Location = new System.Drawing.Point(582, 47);
             this.btn_eraser.Name = "btn_eraser";
-            this.btn_eraser.Size = new System.Drawing.Size(50, 50);
+            this.btn_eraser.Size = new System.Drawing.Size(40, 40);
             this.btn_eraser.TabIndex = 4;
             this.btn_eraser.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_eraser.UseVisualStyleBackColor = false;
@@ -381,11 +504,11 @@ namespace BenDraw
             this.pic.Size = new System.Drawing.Size(1554, 648);
             this.pic.TabIndex = 0;
             this.pic.TabStop = false;
+            this.pic.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pic_KeyDown);
             this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_Paint);
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
-            this.pic.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pic_KeyDown);
             // 
             // Form1
             // 
@@ -401,9 +524,12 @@ namespace BenDraw
             this.pic_color.ResumeLayout(false);
             this.panel_backdrop.ResumeLayout(false);
             this.panel_backdrop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.B_Value)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.G_Value)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.R_Value)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.A_Value)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             this.ResumeLayout(false);
 
@@ -423,13 +549,22 @@ namespace BenDraw
         private System.Windows.Forms.Button btn_fill;
         private System.Windows.Forms.Panel panel_lower;
         private System.Windows.Forms.Panel panel_backdrop;
-        private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Panel btn_show_color;
         private System.Windows.Forms.Button btn_trash;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.TrackBar trackBar1;
         private Components.RoundButton btn_WhiteCircle;
         private Components.RoundButton btn_BlackCircle;
+        private System.Windows.Forms.Label A_Label;
+        private System.Windows.Forms.Label B_Label;
+        private System.Windows.Forms.Label G_Label;
+        private System.Windows.Forms.Label R_Label;
+        private System.Windows.Forms.Button colorDropper;
+        private System.Windows.Forms.TrackBar B_Value;
+        private System.Windows.Forms.TrackBar G_Value;
+        private System.Windows.Forms.TrackBar R_Value;
+        private System.Windows.Forms.TrackBar A_Value;
+        private System.Windows.Forms.Label penThicknessLabel;
     }
 }
 

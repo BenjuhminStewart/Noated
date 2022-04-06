@@ -58,6 +58,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="colorDropper.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAATJJREFUSEvt
+        lU1KxDAcR7sVFNFRcS14L52L+HELwUPoFVwo6iCoiAu9hK5EF/penUKtKcQ0EQbmwSMkLfk1yb9tNWdW
+        WcBDfMb3aXuAjhdjBS/xM+A5Fgk3dIKh0EZXnpWYUHXbs3CGBsaE6htm4QpDAX0+4WA28B5DAX3u4yDa
+        obYxD2C1D6rqdbxDJ3vEzc5YyBscYTKh0Ia+8KKhDd1wQ1cxme6Z2g/RLTirPpmUUFvf7QtMImZ7Jfa+
+        KJbwFv+60r77ojlGJ3vAfwt16z7Qb+uWAwGyh8oYnfC07v2mSKgY6KQ7de8nxUK30S1+wWUHWnjNM88e
+        Kn5tnHiv7n3/5HfRXfCBvGa1Zw2V5qfuigx/nfbVgjvCRcxO+wzVVZ6gBbeGRTH8Gl193+s0Z1aoqi+p
+        Ia6cjgDJSgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btn_WhiteCircle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAA4xJREFUaEPt
