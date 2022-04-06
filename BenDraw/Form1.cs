@@ -52,6 +52,7 @@ namespace BenDraw
             Pen[] pens = handlePens.initializePens();
             p = pens[0];
             eraser = pens[1];
+            penThicknessLabel.Text = String.Format("{0} px", p.Width);
 
             // Set PictureBox, Bitmap, and Grpahics
             canvas = new Canvas(pic);
@@ -121,7 +122,7 @@ namespace BenDraw
 
         private void Thickness_ValueChanged(object sender, EventArgs e)
         {
-            handlePens.ChangePenWidth(p, trackBar1, numericUpDown);
+            handlePens.ChangePenWidth(p, trackBar1, penThicknessLabel);
         }
 
         private void btn_rect_Click(object sender, EventArgs e)
@@ -178,7 +179,7 @@ namespace BenDraw
 
         private void trackbar_thickness(object sender, EventArgs e)
         {
-            handlePens.ChangePenWidth(p, trackBar1, numericUpDown);
+            handlePens.ChangePenWidth(p, trackBar1, penThicknessLabel);
         }
 
         private void Numeric_KeyDown(object sender, KeyEventArgs e)
@@ -226,7 +227,7 @@ namespace BenDraw
             }
 
             // Command For Pen
-            if (e.KeyCode == Keys.P)
+            if (e.KeyCode == Keys.D)
             {
                 toolbar.SetState(1, btn_pencil);
                 e.Handled = true;
@@ -268,7 +269,7 @@ namespace BenDraw
             // Command For Color Dropper
             if (e.KeyCode == Keys.S)
             {
-                toolbar.SetState(6, btn_fill);
+                toolbar.SetState(6, colorDropper);
             }
         }
 

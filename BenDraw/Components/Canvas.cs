@@ -28,7 +28,7 @@ namespace BenDraw.Components
             g = Graphics.FromImage(bm);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(Color.White);
-            pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
+            pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-universal.cur");
             pic.Image = bm;
         }
 
@@ -70,6 +70,7 @@ namespace BenDraw.Components
 
         public void Painting(Pen pen, Point p, int index)
         {
+                
                 if (paint && (index == 1 || index == 2))
                 {
                     current = p;

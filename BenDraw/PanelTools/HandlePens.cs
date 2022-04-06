@@ -33,10 +33,10 @@ namespace BenDraw.PanelTools
             return pens;
         }
 
-        public void ChangePenWidth(Pen p,TrackBar tb, NumericUpDown nud)
+        public void ChangePenWidth(Pen p,TrackBar tb, Label l)
         {
             p.Width = tb.Value;
-            nud.Value = tb.Value;
+            l.Text = String.Format("{0} px", tb.Value);
         }
 
         public void ChangeColorViaDialog(Pen p, Panel colorDisplay) 

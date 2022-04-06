@@ -54,10 +54,10 @@ namespace BenDraw
             this.btn_fill = new System.Windows.Forms.Button();
             this.btn_show_color = new System.Windows.Forms.Panel();
             this.btn_ellipse = new System.Windows.Forms.Button();
-            this.numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.btn_eraser = new System.Windows.Forms.Button();
             this.panel_lower = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
+            this.penThicknessLabel = new System.Windows.Forms.Label();
             this.pic_color.SuspendLayout();
             this.panel_backdrop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.B_Value)).BeginInit();
@@ -66,7 +66,6 @@ namespace BenDraw
             ((System.ComponentModel.ISupportInitialize)(this.A_Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,6 +82,7 @@ namespace BenDraw
             // panel_backdrop
             // 
             this.panel_backdrop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel_backdrop.Controls.Add(this.penThicknessLabel);
             this.panel_backdrop.Controls.Add(this.B_Value);
             this.panel_backdrop.Controls.Add(this.G_Value);
             this.panel_backdrop.Controls.Add(this.R_Value);
@@ -105,7 +105,6 @@ namespace BenDraw
             this.panel_backdrop.Controls.Add(this.btn_fill);
             this.panel_backdrop.Controls.Add(this.btn_show_color);
             this.panel_backdrop.Controls.Add(this.btn_ellipse);
-            this.panel_backdrop.Controls.Add(this.numericUpDown);
             this.panel_backdrop.Controls.Add(this.btn_eraser);
             this.panel_backdrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_backdrop.Location = new System.Drawing.Point(0, 0);
@@ -453,22 +452,6 @@ namespace BenDraw
             this.btn_ellipse.Click += new System.EventHandler(this.btn_ellipse_Click);
             this.btn_ellipse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnyButton_KeyDown);
             // 
-            // numericUpDown
-            // 
-            this.numericUpDown.Location = new System.Drawing.Point(783, 92);
-            this.numericUpDown.Name = "numericUpDown";
-            this.numericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.numericUpDown.Size = new System.Drawing.Size(44, 23);
-            this.numericUpDown.TabIndex = 0;
-            this.numericUpDown.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown.Visible = false;
-            this.numericUpDown.ValueChanged += new System.EventHandler(this.Thickness_ValueChanged);
-            this.numericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Numeric_KeyDown);
-            // 
             // btn_eraser
             // 
             this.btn_eraser.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -514,6 +497,14 @@ namespace BenDraw
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
             // 
+            // penThicknessLabel
+            // 
+            this.penThicknessLabel.AutoSize = true;
+            this.penThicknessLabel.Location = new System.Drawing.Point(784, 96);
+            this.penThicknessLabel.Name = "penThicknessLabel";
+            this.penThicknessLabel.Size = new System.Drawing.Size(0, 15);
+            this.penThicknessLabel.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -534,7 +525,6 @@ namespace BenDraw
             ((System.ComponentModel.ISupportInitialize)(this.A_Value)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             this.ResumeLayout(false);
 
@@ -554,7 +544,6 @@ namespace BenDraw
         private System.Windows.Forms.Button btn_fill;
         private System.Windows.Forms.Panel panel_lower;
         private System.Windows.Forms.Panel panel_backdrop;
-        private System.Windows.Forms.NumericUpDown numericUpDown;
         private System.Windows.Forms.Panel btn_show_color;
         private System.Windows.Forms.Button btn_trash;
         private System.Windows.Forms.Button btn_save;
@@ -570,6 +559,7 @@ namespace BenDraw
         private System.Windows.Forms.TrackBar G_Value;
         private System.Windows.Forms.TrackBar R_Value;
         private System.Windows.Forms.TrackBar A_Value;
+        private System.Windows.Forms.Label penThicknessLabel;
     }
 }
 
