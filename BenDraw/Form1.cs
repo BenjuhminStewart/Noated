@@ -101,8 +101,6 @@ namespace BenDraw
                 canvas.StopPaint(p, toolbar.GetState());
             }
 
-            
-
         }
 
         private void Thickness_ValueChanged(object sender, EventArgs e)
@@ -171,7 +169,6 @@ namespace BenDraw
         {
             Commands(sender, e);
         }
-
 
         private void AnyButton_KeyDown(object sender, KeyEventArgs e)
         {

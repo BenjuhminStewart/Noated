@@ -59,7 +59,7 @@ namespace BenDraw.PanelTools
                         tools[i] = false;
                         tools[index] = true;
                         SetHighlighted(selected);
-                    }
+                    } 
                 }
             }
         }
@@ -71,7 +71,6 @@ namespace BenDraw.PanelTools
             lastHighlighted.BackColor = Color.WhiteSmoke;
             highlighted.BackColor = Color.Gainsboro;
         }
-
 
     }
 }
