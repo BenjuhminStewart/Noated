@@ -32,6 +32,7 @@ namespace BenDraw
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pic_color = new System.Windows.Forms.Panel();
             this.panel_backdrop = new System.Windows.Forms.Panel();
+            this.penThicknessLabel = new System.Windows.Forms.Label();
             this.B_Value = new System.Windows.Forms.TrackBar();
             this.G_Value = new System.Windows.Forms.TrackBar();
             this.R_Value = new System.Windows.Forms.TrackBar();
@@ -57,7 +58,6 @@ namespace BenDraw
             this.btn_eraser = new System.Windows.Forms.Button();
             this.panel_lower = new System.Windows.Forms.Panel();
             this.pic = new System.Windows.Forms.PictureBox();
-            this.penThicknessLabel = new System.Windows.Forms.Label();
             this.pic_color.SuspendLayout();
             this.panel_backdrop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.B_Value)).BeginInit();
@@ -108,13 +108,22 @@ namespace BenDraw
             this.panel_backdrop.Controls.Add(this.btn_eraser);
             this.panel_backdrop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_backdrop.Location = new System.Drawing.Point(0, 0);
+            this.panel_backdrop.MinimumSize = new System.Drawing.Size(10, 5);
             this.panel_backdrop.Name = "panel_backdrop";
             this.panel_backdrop.Size = new System.Drawing.Size(1554, 128);
             this.panel_backdrop.TabIndex = 8;
             // 
+            // penThicknessLabel
+            // 
+            this.penThicknessLabel.AutoSize = true;
+            this.penThicknessLabel.Location = new System.Drawing.Point(792, 95);
+            this.penThicknessLabel.Name = "penThicknessLabel";
+            this.penThicknessLabel.Size = new System.Drawing.Size(0, 15);
+            this.penThicknessLabel.TabIndex = 24;
+            // 
             // B_Value
             // 
-            this.B_Value.Location = new System.Drawing.Point(271, 96);
+            this.B_Value.Location = new System.Drawing.Point(279, 95);
             this.B_Value.Maximum = 255;
             this.B_Value.Name = "B_Value";
             this.B_Value.Size = new System.Drawing.Size(176, 45);
@@ -124,7 +133,7 @@ namespace BenDraw
             // 
             // G_Value
             // 
-            this.G_Value.Location = new System.Drawing.Point(271, 68);
+            this.G_Value.Location = new System.Drawing.Point(279, 67);
             this.G_Value.Maximum = 255;
             this.G_Value.Name = "G_Value";
             this.G_Value.Size = new System.Drawing.Size(176, 45);
@@ -134,7 +143,7 @@ namespace BenDraw
             // 
             // R_Value
             // 
-            this.R_Value.Location = new System.Drawing.Point(271, 38);
+            this.R_Value.Location = new System.Drawing.Point(279, 37);
             this.R_Value.Maximum = 255;
             this.R_Value.Name = "R_Value";
             this.R_Value.Size = new System.Drawing.Size(176, 45);
@@ -144,7 +153,7 @@ namespace BenDraw
             // 
             // A_Value
             // 
-            this.A_Value.Location = new System.Drawing.Point(272, 7);
+            this.A_Value.Location = new System.Drawing.Point(279, 6);
             this.A_Value.Maximum = 255;
             this.A_Value.Name = "A_Value";
             this.A_Value.Size = new System.Drawing.Size(176, 45);
@@ -164,7 +173,7 @@ namespace BenDraw
             this.colorDropper.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.colorDropper.ForeColor = System.Drawing.Color.Black;
             this.colorDropper.Image = ((System.Drawing.Image)(resources.GetObject("colorDropper.Image")));
-            this.colorDropper.Location = new System.Drawing.Point(686, 48);
+            this.colorDropper.Location = new System.Drawing.Point(694, 47);
             this.colorDropper.Name = "colorDropper";
             this.colorDropper.Size = new System.Drawing.Size(40, 40);
             this.colorDropper.TabIndex = 15;
@@ -175,10 +184,11 @@ namespace BenDraw
             // A_Label
             // 
             this.A_Label.AutoSize = true;
+            this.A_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.A_Label.Location = new System.Drawing.Point(228, 9);
-            this.A_Label.MinimumSize = new System.Drawing.Size(5, 5);
+            this.A_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.A_Label.Name = "A_Label";
-            this.A_Label.Size = new System.Drawing.Size(21, 15);
+            this.A_Label.Size = new System.Drawing.Size(28, 15);
             this.A_Label.TabIndex = 14;
             this.A_Label.Text = "A: ";
             this.A_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -186,10 +196,11 @@ namespace BenDraw
             // B_Label
             // 
             this.B_Label.AutoSize = true;
+            this.B_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.B_Label.Location = new System.Drawing.Point(229, 98);
-            this.B_Label.MinimumSize = new System.Drawing.Size(5, 5);
+            this.B_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.B_Label.Name = "B_Label";
-            this.B_Label.Size = new System.Drawing.Size(20, 15);
+            this.B_Label.Size = new System.Drawing.Size(28, 15);
             this.B_Label.TabIndex = 13;
             this.B_Label.Text = "B: ";
             this.B_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -197,10 +208,11 @@ namespace BenDraw
             // G_Label
             // 
             this.G_Label.AutoSize = true;
+            this.G_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.G_Label.Location = new System.Drawing.Point(229, 68);
-            this.G_Label.MinimumSize = new System.Drawing.Size(5, 5);
+            this.G_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.G_Label.Name = "G_Label";
-            this.G_Label.Size = new System.Drawing.Size(21, 15);
+            this.G_Label.Size = new System.Drawing.Size(28, 15);
             this.G_Label.TabIndex = 12;
             this.G_Label.Text = "G: ";
             this.G_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -208,10 +220,11 @@ namespace BenDraw
             // R_Label
             // 
             this.R_Label.AutoSize = true;
+            this.R_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.R_Label.Location = new System.Drawing.Point(229, 38);
-            this.R_Label.MinimumSize = new System.Drawing.Size(5, 5);
+            this.R_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.R_Label.Name = "R_Label";
-            this.R_Label.Size = new System.Drawing.Size(20, 15);
+            this.R_Label.Size = new System.Drawing.Size(28, 15);
             this.R_Label.TabIndex = 11;
             this.R_Label.Text = "R: ";
             this.R_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -224,7 +237,7 @@ namespace BenDraw
             this.btn_WhiteCircle.FlatAppearance.BorderSize = 0;
             this.btn_WhiteCircle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_WhiteCircle.Image = ((System.Drawing.Image)(resources.GetObject("btn_WhiteCircle.Image")));
-            this.btn_WhiteCircle.Location = new System.Drawing.Point(454, 61);
+            this.btn_WhiteCircle.Location = new System.Drawing.Point(462, 60);
             this.btn_WhiteCircle.Name = "btn_WhiteCircle";
             this.btn_WhiteCircle.Size = new System.Drawing.Size(55, 55);
             this.btn_WhiteCircle.TabIndex = 10;
@@ -241,7 +254,7 @@ namespace BenDraw
             this.btn_BlackCircle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btn_BlackCircle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_BlackCircle.Image = ((System.Drawing.Image)(resources.GetObject("btn_BlackCircle.Image")));
-            this.btn_BlackCircle.Location = new System.Drawing.Point(454, 4);
+            this.btn_BlackCircle.Location = new System.Drawing.Point(462, 3);
             this.btn_BlackCircle.Name = "btn_BlackCircle";
             this.btn_BlackCircle.Size = new System.Drawing.Size(55, 55);
             this.btn_BlackCircle.TabIndex = 9;
@@ -250,7 +263,7 @@ namespace BenDraw
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(515, 94);
+            this.trackBar1.Location = new System.Drawing.Point(523, 93);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
@@ -273,7 +286,7 @@ namespace BenDraw
             this.btn_line.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_line.ForeColor = System.Drawing.Color.Black;
             this.btn_line.Image = ((System.Drawing.Image)(resources.GetObject("btn_line.Image")));
-            this.btn_line.Location = new System.Drawing.Point(686, 4);
+            this.btn_line.Location = new System.Drawing.Point(694, 3);
             this.btn_line.Name = "btn_line";
             this.btn_line.Size = new System.Drawing.Size(40, 40);
             this.btn_line.TabIndex = 7;
@@ -293,7 +306,7 @@ namespace BenDraw
             this.btn_save.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_save.ForeColor = System.Drawing.Color.Black;
             this.btn_save.Image = ((System.Drawing.Image)(resources.GetObject("btn_save.Image")));
-            this.btn_save.Location = new System.Drawing.Point(737, 4);
+            this.btn_save.Location = new System.Drawing.Point(745, 3);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(40, 40);
             this.btn_save.TabIndex = 6;
@@ -314,7 +327,7 @@ namespace BenDraw
             this.btn_pencil.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_pencil.ForeColor = System.Drawing.Color.Black;
             this.btn_pencil.Image = ((System.Drawing.Image)(resources.GetObject("btn_pencil.Image")));
-            this.btn_pencil.Location = new System.Drawing.Point(574, 7);
+            this.btn_pencil.Location = new System.Drawing.Point(582, 6);
             this.btn_pencil.Name = "btn_pencil";
             this.btn_pencil.Size = new System.Drawing.Size(40, 40);
             this.btn_pencil.TabIndex = 3;
@@ -334,7 +347,7 @@ namespace BenDraw
             this.btn_trash.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_trash.ForeColor = System.Drawing.Color.Black;
             this.btn_trash.Image = ((System.Drawing.Image)(resources.GetObject("btn_trash.Image")));
-            this.btn_trash.Location = new System.Drawing.Point(737, 48);
+            this.btn_trash.Location = new System.Drawing.Point(745, 47);
             this.btn_trash.Name = "btn_trash";
             this.btn_trash.Size = new System.Drawing.Size(40, 40);
             this.btn_trash.TabIndex = 5;
@@ -355,7 +368,7 @@ namespace BenDraw
             this.btn_rect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_rect.ForeColor = System.Drawing.Color.Black;
             this.btn_rect.Image = ((System.Drawing.Image)(resources.GetObject("btn_rect.Image")));
-            this.btn_rect.Location = new System.Drawing.Point(633, 48);
+            this.btn_rect.Location = new System.Drawing.Point(641, 47);
             this.btn_rect.Name = "btn_rect";
             this.btn_rect.Size = new System.Drawing.Size(40, 40);
             this.btn_rect.TabIndex = 6;
@@ -376,7 +389,7 @@ namespace BenDraw
             this.btn_color.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_color.ForeColor = System.Drawing.Color.Black;
             this.btn_color.Image = ((System.Drawing.Image)(resources.GetObject("btn_color.Image")));
-            this.btn_color.Location = new System.Drawing.Point(515, 7);
+            this.btn_color.Location = new System.Drawing.Point(523, 6);
             this.btn_color.Name = "btn_color";
             this.btn_color.Size = new System.Drawing.Size(40, 40);
             this.btn_color.TabIndex = 1;
@@ -413,7 +426,7 @@ namespace BenDraw
             this.btn_fill.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_fill.ForeColor = System.Drawing.Color.Black;
             this.btn_fill.Image = ((System.Drawing.Image)(resources.GetObject("btn_fill.Image")));
-            this.btn_fill.Location = new System.Drawing.Point(515, 48);
+            this.btn_fill.Location = new System.Drawing.Point(523, 47);
             this.btn_fill.Name = "btn_fill";
             this.btn_fill.Size = new System.Drawing.Size(40, 40);
             this.btn_fill.TabIndex = 2;
@@ -443,7 +456,7 @@ namespace BenDraw
             this.btn_ellipse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_ellipse.ForeColor = System.Drawing.Color.Black;
             this.btn_ellipse.Image = ((System.Drawing.Image)(resources.GetObject("btn_ellipse.Image")));
-            this.btn_ellipse.Location = new System.Drawing.Point(633, 7);
+            this.btn_ellipse.Location = new System.Drawing.Point(641, 6);
             this.btn_ellipse.Name = "btn_ellipse";
             this.btn_ellipse.Size = new System.Drawing.Size(40, 40);
             this.btn_ellipse.TabIndex = 5;
@@ -464,7 +477,7 @@ namespace BenDraw
             this.btn_eraser.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btn_eraser.ForeColor = System.Drawing.Color.Black;
             this.btn_eraser.Image = ((System.Drawing.Image)(resources.GetObject("btn_eraser.Image")));
-            this.btn_eraser.Location = new System.Drawing.Point(574, 48);
+            this.btn_eraser.Location = new System.Drawing.Point(582, 47);
             this.btn_eraser.Name = "btn_eraser";
             this.btn_eraser.Size = new System.Drawing.Size(40, 40);
             this.btn_eraser.TabIndex = 4;
@@ -496,14 +509,6 @@ namespace BenDraw
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
-            // 
-            // penThicknessLabel
-            // 
-            this.penThicknessLabel.AutoSize = true;
-            this.penThicknessLabel.Location = new System.Drawing.Point(784, 96);
-            this.penThicknessLabel.Name = "penThicknessLabel";
-            this.penThicknessLabel.Size = new System.Drawing.Size(0, 15);
-            this.penThicknessLabel.TabIndex = 24;
             // 
             // Form1
             // 

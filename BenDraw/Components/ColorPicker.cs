@@ -39,6 +39,11 @@ namespace BenDraw.Components
             isMouseDown = false;
         }
 
+        public ColorPicker()
+        {
+
+        }
+
         private void InitializeARGB()
         {
 
@@ -120,10 +125,10 @@ namespace BenDraw.Components
             g.Value = c.G;
             b.Value = c.B;
 
-            aTag.Text = String.Format("A:   {0}", a.Value);
-            rTag.Text = String.Format("R:   {0}", r.Value);
-            gTag.Text = String.Format("G:   {0}", g.Value);
-            bTag.Text = String.Format("B:   {0}", b.Value);
+            aTag.Text = String.Format("A: {0}", a.Value);
+            rTag.Text = String.Format("R: {0}", r.Value);
+            gTag.Text = String.Format("G: {0}", g.Value);
+            bTag.Text = String.Format("B: {0}", b.Value);
         }
 
         public void ChangeARGBValue(Pen p)

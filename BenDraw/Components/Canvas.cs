@@ -18,7 +18,7 @@ namespace BenDraw.Components
         Bitmap bm;
         Graphics g;
         PictureBox pic;
-        ColorPicker colorPicker;
+        readonly ColorPicker colorPicker;
         Stack<PictureBox> state = new Stack<PictureBox>();
 
         public Canvas(PictureBox p)
@@ -28,7 +28,7 @@ namespace BenDraw.Components
             g = Graphics.FromImage(bm);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(Color.White);
-            pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-universal.cur");
+            pic.Cursor = new Cursor(Application.StartupPath + "\\precise-dotted.cur");
             pic.Image = bm;
         }
 
@@ -47,23 +47,21 @@ namespace BenDraw.Components
             startX = p.X;
             startY = p.Y;
 
+            Point pt = set_point(pic, p);
 
             // 6: Color Dropper
             if (index == 6)
             {
-                Point pt = set_point(pic, p);
                 colorPicker.SelectColor(pic, pt, pen);
             }
 
             // 7 : Fill
-            if(index == 7)
+            else if(index == 7)
             {
-                Point pt = set_point(pic, p);
                 FloodFill.Fill(bm, p.X, p.Y, pen.Color);
                 pic.Refresh();
             }
-
-
+            pic.Refresh();
 
         }
 
