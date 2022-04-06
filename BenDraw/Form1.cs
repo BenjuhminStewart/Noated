@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BenDraw.Components;
+using BenDraw.Tools;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,139 +20,50 @@ namespace BenDraw
 {
     public partial class Form1 : Form
     {
-        static int DEFAULT_THICKNESS = 5;
-        static Color DEFAULT_COLOR = Color.Black;
         Point selectedColor = new Point();
-        Color currColor = DEFAULT_COLOR;
-        int thickness = DEFAULT_THICKNESS;
-        static int DEFAULT_ERASER_THICKNESS = 99;
-        Bitmap bm;
-        Graphics g;
+        static int DEFAULT_ERASER_THICKNESS = 100;
+        Canvas canvas;
         bool paint = false;
         public Point current = new Point();
         public Point old = new Point();
-        Pen p = new Pen(DEFAULT_COLOR, DEFAULT_THICKNESS);
-        Pen erase = new Pen(Color.White, DEFAULT_ERASER_THICKNESS);
-        int index;
-        int x, y, sX, sY, cX, cY;
+        BD_Pen p = new BD_Pen();
+        BD_Eraser erase = new BD_Eraser();
+        int state;
         bool isMouseDown = false;
         Button highlighted;
-        Stack<PictureBox> state = new Stack<PictureBox>();
 
         public Form1()
         {
             InitializeComponent();
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
-
-            index = 1;
+            canvas = new Canvas(pic);
+            state = 1;
             btn_show_color.BackColor = Color.Black;
-            bm = new Bitmap(pic.Width, pic.Height);
-
-            g = Graphics.FromImage(bm);
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            p.SetLineCap(LineCap.Round, LineCap.Round, DashCap.Round);
-            erase.SetLineCap(LineCap.Round, LineCap.Round, DashCap.Round);
-            g.Clear(Color.White);
             pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             color_picker.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
             color_picker_2.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
-            pic.Image = bm;
-            state.Push(pic);
             highlighted = btn_pencil;
             SetHighlighted(highlighted);
 
         }
 
-        private void Clear()
-        {
-            g.Clear(Color.White);
-            pic.Image = bm;
-        }
-
-        private void Undo()
-        {
-            try
-            {
-                state.Pop();
-                pic = state.Peek();
-                Debug.WriteLine("{0}", pic);
-
-            }
-            catch (Exception ex)
-            {
-                Clear();
-                Debug.WriteLine("{0}", pic);
-            }
-
-        }
-
-
-
         private void pic_MouseDown(object sender, MouseEventArgs e)
         {
-            paint = true;
-            old = e.Location;
-
-            cX = e.X;
-            cY = e.Y;
-
-
-            if (index == 7)
-            {
-
-                Point pt = set_point(pic, e.Location);
-                //FloodFill(bm, pt, currColor);
-                // FloodFillDP(bm, pt.X, pt.Y, currColor);
-                FloodFillFastDP(bm, pt.X, pt.Y, currColor);
-                //ReplaceAll(bm, pt.X, pt.Y, currColor);
-                pic.Refresh();
-            }
-
-
+            int index = 1;
+            canvas.StartPaint(p.GetPen(), e.Location, index);
         }
 
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
         {
-            try
-            {
-                if (bm.GetPixel(e.Location.X, e.Location.Y) == Color.Black)
-                {
-                    pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-white.cur");
-                }
-                else
-                {
-                    pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
-                }
-                if (paint)
-                {
-                    if (index == 1)
-                    {
-                        current = e.Location;
-                        g.DrawLine(p, old, current);
-                        old = current;
-                    }
+            canvas.Painting(p.GetPen(), e.Location);
+        }
 
-                    if (index == 2)
-                    {
-                        current = e.Location;
-                        g.DrawLine(erase, old, current);
-                        old = current;
-                    }
-                }
-                pic.Refresh();
-                x = e.X;
-                y = e.Y;
-                sX = e.X - cX;
-                sY = e.Y - cY;
-            }
-            catch
-            {
-
-            }
-
+        private void pic_MouseUp(object sender, MouseEventArgs e)
+        {
+            int index = 1;
+            canvas.StopPaint(p.GetPen(), index);
         }
 
         private void SetHighlighted(Button selected)
@@ -162,41 +75,12 @@ namespace BenDraw
             highlighted.BackColor = Color.DarkGray;
         }
 
-        private void pic_MouseUp(object sender, MouseEventArgs e)
-        {
-            paint = false;
-
-            sX = x - cX;
-            sY = y - cY;
-
-            if (index == 3)
-            {
-                g.DrawEllipse(p, cX, cY, sX, sY);
-            }
-
-            if (index == 4)
-            {
-
-                g.DrawRectangle(p, cX, cY, sX, sY);
-            }
-
-            if (index == 5)
-            {
-                g.DrawLine(p, cX, cY, x, y);
-            }
-
-            Debug.WriteLine("{0}", bm);
-            pic.Refresh();
-            state.Push(pic);
-        }
-
 
 
         private void Thickness_ValueChanged(object sender, EventArgs e)
         {
-            thickness = (int)numericUpDown.Value;
-            trackBar1.Value = thickness;
-            p.Width = (float)numericUpDown.Value;
+            trackBar1.Value = (int)numericUpDown.Value;
+            p.ChangePenWidth((int)numericUpDown.Value);
 
 
         }
@@ -213,28 +97,6 @@ namespace BenDraw
             SetHighlighted(btn_line);
         }
 
-        private void pic_paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            if (paint)
-            {
-                if (index == 3)
-                {
-                    g.DrawEllipse(p, cX, cY, sX, sY);
-                }
-
-                if (index == 4)
-                {
-                    g.DrawRectangle(p, cX, cY, sX, sY);
-                }
-
-                if (index == 5)
-                {
-                    g.DrawLine(p, cX, cY, x, y);
-                }
-            }
-
-        }
 
         private void btn_ellipse_Click(object sender, EventArgs e)
         {
