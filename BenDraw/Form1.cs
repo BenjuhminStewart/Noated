@@ -87,20 +87,20 @@ namespace BenDraw
 
         private void btn_rect_Click(object sender, EventArgs e)
         {
-            index = 4;
+            state = 4;
             SetHighlighted(btn_rect);
         }
 
         private void btn_line_Click(object sender, EventArgs e)
         {
-            index = 5;
+            state = 5;
             SetHighlighted(btn_line);
         }
 
 
         private void btn_ellipse_Click(object sender, EventArgs e)
         {
-            index = 3;
+            state = 3;
             SetHighlighted(btn_ellipse);
         }
 
