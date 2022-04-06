@@ -59,7 +59,7 @@ namespace BenDraw.PanelTools
                         tools[i] = false;
                         tools[index] = true;
                         SetHighlighted(selected);
-                    }
+                    } 
                 }
             }
         }
@@ -68,8 +68,8 @@ namespace BenDraw.PanelTools
         {
             Button lastHighlighted = highlighted;
             highlighted = selected;
-            lastHighlighted.BackColor = Color.FromArgb(64, 64, 64);
-            highlighted.BackColor = Color.DarkGray;
+            lastHighlighted.BackColor = Color.WhiteSmoke;
+            highlighted.BackColor = Color.Gainsboro;
         }
 
     }

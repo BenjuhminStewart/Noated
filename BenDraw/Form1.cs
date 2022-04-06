@@ -25,7 +25,6 @@ namespace BenDraw
         Toolbar toolbar;
         HandlePens handlePens;
         ColorPicker colorPickerRGB;
-        ColorPicker colorPickerBW;
         SaveSystem saveSystem;
         Pen p;
         Pen eraser;
@@ -57,8 +56,11 @@ namespace BenDraw
 
             // Set Color Pickers
             colorPickerRGB = new ColorPicker(color_picker, btn_show_color);
-            colorPickerBW = new ColorPicker(color_picker_2, btn_show_color);
 
+        }
+        private void pic_KeyDown(object sender, KeyEventArgs e)
+        {
+            Commands(sender, e);
         }
 
         private void pic_MouseDown(object sender, MouseEventArgs e)
@@ -71,9 +73,9 @@ namespace BenDraw
             {
                 canvas.StartPaint(p, e.Location, toolbar.GetState());
             }
-            
-        }
 
+            pic.Focus();
+        }
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
         {
@@ -98,19 +100,8 @@ namespace BenDraw
             {
                 canvas.StopPaint(p, toolbar.GetState());
             }
-            
+
         }
-
-        private void SetHighlighted(Button selected)
-        {
-
-            Button lastHighlighted = highlighted;
-            highlighted = selected;
-            lastHighlighted.BackColor = Color.FromArgb(64, 64, 64);
-            highlighted.BackColor = Color.DarkGray;
-        }
-
-
 
         private void Thickness_ValueChanged(object sender, EventArgs e)
         {
@@ -149,21 +140,6 @@ namespace BenDraw
             colorPickerRGB.FindingColor(pic, color_picker, btn_show_color, e.Location);
         }
 
-        private void cp_MouseDown(object sender, MouseEventArgs e)
-        {
-            colorPickerBW.SelectColor(color_picker_2, btn_show_color, e.Location, p);
-        }
-
-        private void cp_MouseMove(object sender, MouseEventArgs e)
-        {
-            colorPickerBW.HandleSelectedColor(p, btn_show_color);
-        }
-
-        private void cp_MouseUp(object sender, MouseEventArgs e)
-        {
-            colorPickerBW.FindingColor(pic, color_picker_2, btn_show_color, e.Location);
-        }
-
         private void btn_eraser_Click(object sender, EventArgs e)
         {
             toolbar.SetState(2, btn_eraser);
@@ -191,79 +167,12 @@ namespace BenDraw
 
         private void Numeric_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.P)
-            {
-                toolbar.SetState(1, btn_pencil);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.C)
-            {
-                canvas.ClearScreen();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.Left)
-            {
-                canvas.Undo();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.E)
-            {
-                toolbar.SetState(2, btn_eraser);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-
-            }
+            Commands(sender, e);
         }
-
 
         private void AnyButton_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.P)
-            {
-                toolbar.SetState(1, btn_pencil);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.C)
-            {
-                canvas.ClearScreen();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.Left)
-            {
-                canvas.Undo();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-
-            if (e.KeyCode == Keys.E)
-            {
-                toolbar.SetState(2, btn_eraser);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-
-            }
+            Commands(sender, e);
         }
 
         private void btn_color_Click(object sender, EventArgs e)
@@ -279,6 +188,54 @@ namespace BenDraw
         private void pic_Paint(object sender, PaintEventArgs e)
         {
             canvas.ShowShapeDrawing(p, toolbar.GetState(), e);
+        }
+
+        private void BlackCircleMouseDown(object sender, MouseEventArgs e)
+        {
+            handlePens.ChangeColorBlack(p, btn_show_color);
+        }
+
+        private void WhiteCircleMouseDown(object sender, MouseEventArgs e)
+        {
+            handlePens.ChangeColorWhite(p, btn_show_color);
+        }
+
+        private void Commands(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.P)
+            {
+                toolbar.SetState(1, btn_pencil);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.C)
+            {
+                canvas.ClearScreen();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+                canvas.Undo();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+
+            if (e.KeyCode == Keys.E)
+            {
+                toolbar.SetState(2, btn_eraser);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
         }
     }
 }
