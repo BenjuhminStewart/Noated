@@ -88,7 +88,6 @@ namespace BenDraw
             this.panel_backdrop.Name = "panel_backdrop";
             this.panel_backdrop.Size = new System.Drawing.Size(1554, 128);
             this.panel_backdrop.TabIndex = 8;
-            this.panel_backdrop.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.panel_KeyDown);
             // 
             // color_picker_2
             // 
@@ -379,8 +378,6 @@ namespace BenDraw
             this.pic.Size = new System.Drawing.Size(1554, 803);
             this.pic.TabIndex = 0;
             this.pic.TabStop = false;
-            this.pic.Click += new System.EventHandler(this.pic_Click);
-            this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_paint);
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);

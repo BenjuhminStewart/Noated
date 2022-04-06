@@ -8,22 +8,26 @@ namespace BenDraw.PanelTools
     internal class Toolbar
     {
         IDictionary<int, bool> tools;
+        int startIndex;
         public Toolbar()
         {
             tools = new Dictionary<int, bool>();
+            startIndex = 1;
         }
 
         public void LoadTools()
         {
-            for(int i = 1; i < 11; i++)
+            for(int i = 0; i < 11; i++)
             {
-                if(i==1)
+                if(i==0)
                 {
-                    tools.Add(i, true);
+                    tools.Add(startIndex, true);
                 } else
                 {
-                    tools.Add(i, false);
+                    tools.Add(startIndex, false);
                 }
+
+                startIndex++;
             }
         }
 
@@ -37,24 +41,22 @@ namespace BenDraw.PanelTools
                 }
             }
 
-            return 1;
+            return -1;
         }
 
         public void SetState(int index)
         {
-            if(tools.ContainsKey(index))
+            if (tools.ContainsKey(index))
             {
-                foreach (var tool in tools)
+                for(int i = 1; i < tools.Count; i++)
                 {
-                    if (tool.Value)
+                    if (tools[i])
                     {
-
-                        tools.Add(tool.Key, false);
+                        tools[i] = false;
+                        tools[index] = true;
                     }
                 }
-                tools.Add(index, true);
             }
-            
         }
 
 

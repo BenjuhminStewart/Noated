@@ -23,6 +23,7 @@ namespace BenDraw.Components
 
         public Canvas(PictureBox p)
         {
+            pic = p;
             bm = new Bitmap(p.Width, p.Height);
             g = Graphics.FromImage(bm);
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -136,7 +137,7 @@ namespace BenDraw.Components
 
 
 
-        void Undo()
+        public void Undo()
         {
             try
             {
@@ -153,7 +154,7 @@ namespace BenDraw.Components
 
         }
 
-        void ClearScreen()
+        public void ClearScreen()
         {
             g.Clear(Color.White);
             pic.Image = bm;
