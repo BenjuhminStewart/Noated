@@ -12,7 +12,9 @@ namespace BenDraw.Algorithms
 
         public static void Fill(Bitmap bm, int x, int y, Color fill)
         {
-            MyFill(bm, x, y, fill);
+            // MyFill(bm, x, y, fill);
+            // ReplaceAll(bm, fill);
+            InvertAll(bm);
         }
         unsafe static Color GetPixel(BitmapData bmpD, int x, int y)
         {
@@ -30,7 +32,7 @@ namespace BenDraw.Algorithms
         }
 
 
-        public void ReplaceAll(Bitmap bm, int x, int y, Color fill)
+        public static void ReplaceAll(Bitmap bm, int x, int y, Color fill)
         {
             int n = bm.Width;
             int m = bm.Height;
@@ -44,6 +46,21 @@ namespace BenDraw.Algorithms
                     {
                         SetPixel(bmpData, j, i, fill);
                     }
+                }
+            });
+            bm.UnlockBits(bmpData);
+        }
+
+        public static void InvertAll(Bitmap bm){
+            int n = bm.Width;
+            int m = bm.Height;
+            var rect = new Rectangle(0, 0, n, m);
+            var bmpData = bm.LockBits(rect, ImageLockMode.ReadWrite, bm.PixelFormat);
+            Parallel.For(0, m, (int i) => {
+                for (int j = 0; j < n; j++)
+                {
+                    var fill = ColorHelpers.ComplimentaryColor(GetPixel(bmpData, j, i));
+                    SetPixel(bmpData, j, i, fill);
                 }
             });
             bm.UnlockBits(bmpData);
