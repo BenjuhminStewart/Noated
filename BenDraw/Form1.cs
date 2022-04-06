@@ -164,7 +164,7 @@ namespace BenDraw
 
         private void cp_MouseDown(object sender, MouseEventArgs e)
         {
-            colorPickerBW.SelectColor(color_picker, btn_show_color, e.Location, p);
+            colorPickerBW.SelectColor(color_picker_2, btn_show_color, e.Location, p);
         }
 
         private void cp_MouseMove(object sender, MouseEventArgs e)
@@ -174,7 +174,7 @@ namespace BenDraw
 
         private void cp_MouseUp(object sender, MouseEventArgs e)
         {
-            colorPickerBW.FindingColor(pic, color_picker, btn_show_color, e.Location);
+            colorPickerBW.FindingColor(pic, color_picker_2, btn_show_color, e.Location);
         }
 
         private void btn_eraser_Click(object sender, EventArgs e)

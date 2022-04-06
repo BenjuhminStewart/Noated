@@ -19,7 +19,6 @@ namespace BenDraw.Components
         Graphics g;
         PictureBox pic;
         Stack<PictureBox> state = new Stack<PictureBox>();
-        FloodFill FloodFill = new FloodFill();
 
         public Canvas(PictureBox p)
         {
