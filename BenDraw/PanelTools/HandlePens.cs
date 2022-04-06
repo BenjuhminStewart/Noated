@@ -50,5 +50,15 @@ namespace BenDraw.PanelTools
 
         }
 
+        public void ChangeColorBlack(Pen p)
+        {
+            p.Color = Color.Black;
+        }
+
+        public void ChangeColorWhite(Pen p)
+        {
+            p.Color = Color.White;
+        }
+
     }
 }
