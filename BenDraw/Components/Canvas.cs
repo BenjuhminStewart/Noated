@@ -50,7 +50,7 @@ namespace BenDraw.Components
             if(index == 7)
             {
                 Point pt = set_point(pic, p);
-                FloodFill.MyFill(bm, p.X, p.Y, pen.Color);
+                FloodFill.Fill(bm, p.X, p.Y, pen.Color);
                 pic.Refresh();
             }
         }

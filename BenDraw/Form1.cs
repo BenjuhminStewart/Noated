@@ -20,30 +20,27 @@ namespace BenDraw
 {
     public partial class Form1 : Form
     {
-        Point selectedColor = new Point();
-        static int DEFAULT_ERASER_THICKNESS = 100;
+
         Canvas canvas;
-        bool paint = false;
-        public Point current = new Point();
-        public Point old = new Point();
-        Toolbar toolbar = new Toolbar();
+        Toolbar toolbar;
         HandlePens handlePens;
         ColorPicker colorPickerRGB;
         ColorPicker colorPickerBW;
         SaveSystem saveSystem;
         Pen p;
         Pen eraser;
-        int state;
-        bool isMouseDown = false;
         Button highlighted;
 
         public Form1()
         {
             InitializeComponent();
+
+            // Set Application Dimensions
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
 
             // Load tools
+            toolbar = new Toolbar(btn_pencil);
             toolbar.LoadTools();
 
             // Create Save System
@@ -58,16 +55,9 @@ namespace BenDraw
             // Set PictureBox, Bitmap, and Grpahics
             canvas = new Canvas(pic);
 
-            // Set state of the toolbar
-            state = toolbar.GetState();
-
             // Set Color Pickers
             colorPickerRGB = new ColorPicker(color_picker, btn_show_color);
             colorPickerBW = new ColorPicker(color_picker_2, btn_show_color);
-
-            // Control Highlighted Panel Item
-            highlighted = btn_pencil;
-            SetHighlighted(highlighted);
 
         }
 
@@ -129,21 +119,18 @@ namespace BenDraw
 
         private void btn_rect_Click(object sender, EventArgs e)
         {
-            toolbar.SetState(4);
-            SetHighlighted(btn_rect);
+            toolbar.SetState(4, btn_rect);
         }
 
         private void btn_line_Click(object sender, EventArgs e)
         {
-            toolbar.SetState(5);
-            SetHighlighted(btn_line);
+            toolbar.SetState(5, btn_line);
         }
 
 
         private void btn_ellipse_Click(object sender, EventArgs e)
         {
-            toolbar.SetState(3);
-            SetHighlighted(btn_ellipse);
+            toolbar.SetState(3, btn_ellipse);
         }
 
 
@@ -179,20 +166,17 @@ namespace BenDraw
 
         private void btn_eraser_Click(object sender, EventArgs e)
         {
-            toolbar.SetState(2);
-            SetHighlighted(btn_eraser);
+            toolbar.SetState(2, btn_eraser);
         }
 
         private void btn_pencil_Click(object sender, EventArgs e)
         {
-            toolbar.SetState(1);
-            SetHighlighted(btn_pencil);
+            toolbar.SetState(1, btn_pencil);
         }
 
         private void btn_fill_Click(object sender, EventArgs e)
         {
-            toolbar.SetState(7);
-            SetHighlighted(btn_fill);
+            toolbar.SetState(7, btn_fill);
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -215,8 +199,7 @@ namespace BenDraw
 
             if (e.KeyCode == Keys.P)
             {
-                toolbar.SetState(1);
-                SetHighlighted(btn_pencil);
+                toolbar.SetState(1, btn_pencil);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -237,8 +220,7 @@ namespace BenDraw
 
             if (e.KeyCode == Keys.E)
             {
-                toolbar.SetState(2);
-                SetHighlighted(btn_eraser);
+                toolbar.SetState(2, btn_eraser);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 
@@ -256,8 +238,7 @@ namespace BenDraw
 
             if (e.KeyCode == Keys.P)
             {
-                toolbar.SetState(1);
-                SetHighlighted(btn_pencil);
+                toolbar.SetState(1, btn_pencil);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -278,8 +259,7 @@ namespace BenDraw
 
             if (e.KeyCode == Keys.E)
             {
-                toolbar.SetState(2);
-                SetHighlighted(btn_eraser);
+                toolbar.SetState(2, btn_eraser);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 

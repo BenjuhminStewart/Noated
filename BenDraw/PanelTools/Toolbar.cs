@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace BenDraw.PanelTools
 {
@@ -9,10 +10,13 @@ namespace BenDraw.PanelTools
     {
         IDictionary<int, bool> tools;
         int startIndex;
-        public Toolbar()
+        Button highlighted;
+        public Toolbar(Button defaultHighlighted)
         {
             tools = new Dictionary<int, bool>();
             startIndex = 1;
+            highlighted = defaultHighlighted;
+            SetHighlighted(defaultHighlighted);
         }
 
         public void LoadTools()
@@ -44,7 +48,7 @@ namespace BenDraw.PanelTools
             return -1;
         }
 
-        public void SetState(int index)
+        public void SetState(int index, Button selected)
         {
             if (tools.ContainsKey(index))
             {
@@ -54,11 +58,19 @@ namespace BenDraw.PanelTools
                     {
                         tools[i] = false;
                         tools[index] = true;
+                        SetHighlighted(selected);
                     }
                 }
             }
         }
 
+        public void SetHighlighted(Button selected)
+        {
+            Button lastHighlighted = highlighted;
+            highlighted = selected;
+            lastHighlighted.BackColor = Color.FromArgb(64, 64, 64);
+            highlighted.BackColor = Color.DarkGray;
+        }
 
     }
 }
