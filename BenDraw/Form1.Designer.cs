@@ -262,6 +262,7 @@ namespace BenDraw
             // color_picker
             // 
             this.color_picker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.color_picker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.color_picker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.color_picker.Image = global::BenDraw.Properties.Resources.color_picker;
             this.color_picker.Location = new System.Drawing.Point(12, 4);
@@ -298,7 +299,7 @@ namespace BenDraw
             // btn_show_color
             // 
             this.btn_show_color.BackColor = System.Drawing.Color.Black;
-            this.btn_show_color.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.btn_show_color.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.btn_show_color.Location = new System.Drawing.Point(136, 5);
             this.btn_show_color.Name = "btn_show_color";
             this.btn_show_color.Size = new System.Drawing.Size(19, 114);
@@ -375,24 +376,25 @@ namespace BenDraw
             // 
             this.pic.BackColor = System.Drawing.Color.White;
             this.pic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pic.Location = new System.Drawing.Point(0, 0);
+            this.pic.Location = new System.Drawing.Point(0, 128);
             this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(1554, 803);
+            this.pic.Size = new System.Drawing.Size(1554, 648);
             this.pic.TabIndex = 0;
             this.pic.TabStop = false;
             this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_Paint);
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
+            this.pic.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pic_KeyDown);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1554, 803);
+            this.Controls.Add(this.pic);
             this.Controls.Add(this.panel_lower);
             this.Controls.Add(this.pic_color);
-            this.Controls.Add(this.pic);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BenDraw";
