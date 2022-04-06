@@ -378,6 +378,7 @@ namespace BenDraw
             this.pic.Size = new System.Drawing.Size(1554, 803);
             this.pic.TabIndex = 0;
             this.pic.TabStop = false;
+            this.pic.Paint += new System.Windows.Forms.PaintEventHandler(this.pic_Paint);
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
@@ -393,7 +394,6 @@ namespace BenDraw
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BenDraw";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.App_KeyDown);
             this.pic_color.ResumeLayout(false);
             this.panel_backdrop.ResumeLayout(false);
             this.panel_backdrop.PerformLayout();

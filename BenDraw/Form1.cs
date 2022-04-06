@@ -73,20 +73,42 @@ namespace BenDraw
 
         private void pic_MouseDown(object sender, MouseEventArgs e)
         {
-            int index = 1;
-            canvas.StartPaint(p, e.Location, index);
+            if(toolbar.GetState() == 2)
+            {
+                canvas.StartPaint(eraser, e.Location, toolbar.GetState());
+                
+            } else
+            {
+                canvas.StartPaint(p, e.Location, toolbar.GetState());
+            }
+            
         }
 
 
         private void pic_MouseMove(object sender, MouseEventArgs e)
         {
-            canvas.Painting(p, e.Location);
+            if (toolbar.GetState() == 2) 
+            {
+                canvas.Painting(eraser, e.Location);
+                
+            }  else
+            {
+                canvas.Painting(p, e.Location);
+            }
+           
         }
 
         private void pic_MouseUp(object sender, MouseEventArgs e)
         {
-            int index = 1;
-            canvas.StopPaint(p, index);
+            if( toolbar.GetState() == 2)
+            {
+                canvas.StopPaint(eraser, toolbar.GetState());
+                
+            } else
+            {
+                canvas.StopPaint(p, toolbar.GetState());
+            }
+            
         }
 
         private void SetHighlighted(Button selected)
@@ -183,13 +205,6 @@ namespace BenDraw
             handlePens.ChangePenWidth(p, trackBar1, numericUpDown);
         }
 
-        private void App_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-
-
         private void Numeric_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -273,16 +288,17 @@ namespace BenDraw
 
         private void btn_color_Click(object sender, EventArgs e)
         {
-            ColorDialog cd = new ColorDialog();
-            if (cd.ShowDialog() == DialogResult.OK)
-            {
-                handlePens.ChangeColorViaDialog(p, btn_show_color, cd.Color);
-            }
+            handlePens.ChangeColorViaDialog(p, btn_show_color);  
         }
 
         private void btn_trash_Click(object sender, EventArgs e)
         {
             canvas.ClearScreen();
+        }
+
+        private void pic_Paint(object sender, PaintEventArgs e)
+        {
+            canvas.ShowShapeDrawing(p, toolbar.GetState(), e);
         }
     }
 }

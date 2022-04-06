@@ -11,7 +11,7 @@ namespace BenDraw.PanelTools
     {
         static int DEFAULT_PEN_THICKNESS = 5;
         static Color DEFAULT_PEN_COLOR = Color.Black;
-        static int DEFAULT_ERASER_THICKNESS = 5;
+        static int DEFAULT_ERASER_THICKNESS = 100;
         static Color DEFAULT_ERASER_COLOR = Color.White;
         public HandlePens()
         { 
@@ -39,10 +39,15 @@ namespace BenDraw.PanelTools
             nud.Value = tb.Value;
         }
 
-        public void ChangeColorViaDialog(Pen p, Panel colorDisplay, Color new_color) 
+        public void ChangeColorViaDialog(Pen p, Panel colorDisplay) 
         {
-            p.Color = new_color;
-            colorDisplay.BackColor = new_color;
+            ColorDialog cd = new ColorDialog();
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                p.Color = cd.Color;
+                colorDisplay.BackColor = cd.Color;
+            }
+
         }
 
     }

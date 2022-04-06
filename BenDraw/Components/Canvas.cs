@@ -42,6 +42,8 @@ namespace BenDraw.Components
         public void StartPaint(Pen pen, Point p, int index)
         {
             paint = true;
+         
+            
             old = p;
 
             startX = p.X;
@@ -111,6 +113,33 @@ namespace BenDraw.Components
             {
                 DrawLine(p, startX, startY, mouseX, mouseY);
             }
+        }
+
+        public void ShowShapeDrawing(Pen p, int index, PaintEventArgs e)
+        {
+            int shapeWidth = mouseX - startX;
+            int shapeHeight = mouseY - startY;
+            Graphics tempGraphics = e.Graphics; 
+            if (paint)
+            {
+                if (index == 3)
+                {
+                    DrawEllipse(p, startX, startY, shapeWidth, shapeHeight);
+                }
+
+                // 4 : Rectangle
+                else if (index == 4)
+                {
+                    DrawRectangle(p, startX, startY, shapeWidth, shapeHeight);
+                }
+
+                // 5 : Line
+                else if (index == 5)
+                {
+                    DrawLine(p, startX, startY, mouseX, mouseY);
+                }
+            }
+
         }
 
 
