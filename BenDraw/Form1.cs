@@ -89,11 +89,11 @@ namespace BenDraw
         {
             if (toolbar.GetState() == 2) 
             {
-                canvas.Painting(eraser, e.Location);
+                canvas.Painting(eraser, e.Location, toolbar.GetState());
                 
             }  else
             {
-                canvas.Painting(p, e.Location);
+                canvas.Painting(p, e.Location, toolbar.GetState());
             }
            
         }

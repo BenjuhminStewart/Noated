@@ -41,9 +41,7 @@ namespace BenDraw.Components
 
         public void StartPaint(Pen pen, Point p, int index)
         {
-            paint = true;
-         
-            
+            paint = true;        
             old = p;
 
             startX = p.X;
@@ -53,41 +51,23 @@ namespace BenDraw.Components
             if(index == 7)
             {
                 Point pt = set_point(pic, p);
-                FloodFill.Fill(bm, p.X, p.Y, pen.Color);
-                //FloodFill.ReplaceAll(bm, pt.X, pt.Y, pen.Color);
+                FloodFill.MyFill(bm, p.X, p.Y, pen.Color);
                 pic.Refresh();
             }
         }
 
 
-        public void Painting(Pen pen, Point p)
+        public void Painting(Pen pen, Point p, int index)
         {
-            try
-            {
-                if (bm.GetPixel(p.X, p.Y) == Color.Black)
+                if (paint && (index == 1 || index == 2))
                 {
-                    pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-white.cur");
-                }
-                else
-                {
-                    pic.Cursor = new Cursor(Application.StartupPath + "\\cursor-paint.cur");
-                }
-                if (paint)
-                {
-                  
-                        current = p;
-                        g.DrawLine(pen, old, current);
-                        old = current;
- 
-                }
+                    current = p;
+                    g.DrawLine(pen, old, current);
+                    old = current;
+                } 
                 pic.Refresh();
                 mouseX = p.X;
                 mouseY = p.Y;
-            }
-            catch
-            {
-
-            }
         }
 
         public void StopPaint(Pen p, int index)
@@ -103,40 +83,42 @@ namespace BenDraw.Components
             }
 
             // 4 : Rectangle
-            else if (index == 4)
+            if (index == 4)
             {
                 DrawRectangle(p, startX, startY, shapeWidth, shapeHeight);
             }
 
             // 5 : Line
-            else if (index == 5)
+            if (index == 5)
             {
                 DrawLine(p, startX, startY, mouseX, mouseY);
             }
+
+            pic.Refresh();
         }
 
         public void ShowShapeDrawing(Pen p, int index, PaintEventArgs e)
         {
             int shapeWidth = mouseX - startX;
             int shapeHeight = mouseY - startY;
-            Graphics tempGraphics = e.Graphics; 
+            Graphics g = e.Graphics; 
             if (paint)
             {
                 if (index == 3)
                 {
-                    DrawEllipse(p, startX, startY, shapeWidth, shapeHeight);
+                    g.DrawEllipse(p, startX, startY, shapeWidth, shapeHeight);
                 }
 
                 // 4 : Rectangle
                 else if (index == 4)
                 {
-                    DrawRectangle(p, startX, startY, shapeWidth, shapeHeight);
+                    g.DrawRectangle(p, startX, startY, shapeWidth, shapeHeight);
                 }
 
                 // 5 : Line
                 else if (index == 5)
                 {
-                    DrawLine(p, startX, startY, mouseX, mouseY);
+                    g.DrawLine(p, startX, startY, mouseX, mouseY);
                 }
             }
 
