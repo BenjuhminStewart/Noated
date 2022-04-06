@@ -18,6 +18,7 @@ namespace BenDraw.Components
         Bitmap bm;
         Graphics g;
         PictureBox pic;
+        ColorPicker colorPicker;
         Stack<PictureBox> state = new Stack<PictureBox>();
 
         public Canvas(PictureBox p)
@@ -46,6 +47,14 @@ namespace BenDraw.Components
             startX = p.X;
             startY = p.Y;
 
+
+            // 6: Color Dropper
+            if (index == 6)
+            {
+                Point pt = set_point(pic, p);
+                colorPicker.SelectColor(pic, pt, pen);
+            }
+
             // 7 : Fill
             if(index == 7)
             {
@@ -53,6 +62,9 @@ namespace BenDraw.Components
                 FloodFill.Fill(bm, p.X, p.Y, pen.Color);
                 pic.Refresh();
             }
+
+
+
         }
 
 
