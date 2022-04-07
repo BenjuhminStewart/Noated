@@ -12,8 +12,8 @@ namespace BenDraw.Components
     internal class Canvas
     {
         bool paint = false;
-        Point current = new Point();
-        Point old = new Point();
+        Point current = Point.Empty;
+        Point old = Point.Empty;
         int mouseX, mouseY, startX, startY;
         Bitmap bm;
         Graphics g;
@@ -68,13 +68,21 @@ namespace BenDraw.Components
 
         public void Painting(Pen pen, Point p, int index)
         {
-                
-                if (paint && (index == 1 || index == 2))
+                if (paint && (index == 1 || index == 2) && current != Point.Empty)
                 {
-                    current = p;
-                    g.DrawLine(pen, old, current);
-                    old = current;
+                    //g.DrawLine(pen, old, current);
+                    var x = Math.Min(Math.Min(old.X, current.X), p.X);
+                    var y = Math.Min(Math.Min(old.Y, current.Y), p.Y);
+                    var xMax = Math.Max(Math.Max(old.X, current.X), p.X);
+                    var yMax = Math.Max(Math.Max(old.Y, current.Y), p.Y);
+                    var startAngle = (int) (Math.Atan((p.Y - current.Y) * 1.0/(p.X - current.X)) * 180 / Math.PI) + 15;
+                    Console.WriteLine(startAngle);
+                    g.DrawArc(pen, x, y, xMax - x + 1, yMax - y + 1, startAngle, 75);
+                    // g.DrawRectangle(pen, x, y, xMax - x + 1, yMax - y + 1);
+                    old = current; 
+                   
                 } 
+                current = p;
                 pic.Refresh();
                 mouseX = p.X;
                 mouseY = p.Y;
@@ -103,7 +111,8 @@ namespace BenDraw.Components
             {
                 DrawLine(p, startX, startY, mouseX, mouseY);
             }
-
+            old = Point.Empty;
+            current = Point.Empty;
             pic.Refresh();
         }
 
