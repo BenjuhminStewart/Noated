@@ -17,11 +17,12 @@ namespace BenDraw.Components
         int mouseX, mouseY, startX, startY;
         Bitmap bm;
         Graphics g;
+        TextBox cursorLocation;
         PictureBox pic;
         readonly ColorPicker colorPicker;
         Stack<PictureBox> state = new Stack<PictureBox>();
 
-        public Canvas(PictureBox p)
+        public Canvas(PictureBox p, TextBox cursorLocation)
         {
             pic = p;
             bm = new Bitmap(p.Width, p.Height);
@@ -30,6 +31,7 @@ namespace BenDraw.Components
             g.Clear(Color.White);
             pic.Cursor = new Cursor(Application.StartupPath + "\\precise-dotted.cur");
             pic.Image = bm;
+            this.cursorLocation = cursorLocation;
         }
 
         static Point set_point(PictureBox pb, Point pt)
@@ -65,19 +67,24 @@ namespace BenDraw.Components
 
         }
 
-
         public void Painting(Pen pen, Point p, int index)
         {
+            SetLocationLabel(p);
+            if (paint && (index == 1 || index == 2))
+            {
+                current = p;
+                g.DrawLine(pen, old, current);
+                old = current;
+            }
                 
-                if (paint && (index == 1 || index == 2))
-                {
-                    current = p;
-                    g.DrawLine(pen, old, current);
-                    old = current;
-                } 
-                pic.Refresh();
-                mouseX = p.X;
-                mouseY = p.Y;
+            pic.Refresh();
+            mouseX = p.X;
+            mouseY = p.Y;
+        }
+
+        private void SetLocationLabel(Point p)
+        {
+            cursorLocation.Text = String.Format("(X: {0}, Y: {1})", p.X, p.Y);
         }
 
         public void StopPaint(Pen p, int index)

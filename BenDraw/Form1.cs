@@ -54,11 +54,8 @@ namespace BenDraw
             eraser = pens[1];
             penThicknessLabel.Text = String.Format("{0} px", p.Width);
 
-            // Set PictureBox, Bitmap, and Grpahics
-            canvas = new Canvas(pic);
-
-
-
+            // Set PictureBox, Bitmap, and Graphics
+            canvas = new Canvas(pic, cursorLocation);
         }
         private void pic_KeyDown(object sender, KeyEventArgs e)
         {
@@ -291,11 +288,6 @@ namespace BenDraw
             {
                 colorPickerRGB.ChangeARGBValue(p);
             }
-        }
-
-        private void R_Label_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

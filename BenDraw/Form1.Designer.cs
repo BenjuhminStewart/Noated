@@ -57,7 +57,9 @@ namespace BenDraw
             this.btn_ellipse = new System.Windows.Forms.Button();
             this.btn_eraser = new System.Windows.Forms.Button();
             this.panel_lower = new System.Windows.Forms.Panel();
+            this.cursor = new System.Windows.Forms.PictureBox();
             this.pic = new System.Windows.Forms.PictureBox();
+            this.cursorLocation = new System.Windows.Forms.TextBox();
             this.pic_color.SuspendLayout();
             this.panel_backdrop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.B_Value)).BeginInit();
@@ -66,6 +68,8 @@ namespace BenDraw
             ((System.ComponentModel.ISupportInitialize)(this.A_Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).BeginInit();
+            this.panel_lower.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cursor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,52 +187,47 @@ namespace BenDraw
             // 
             // A_Label
             // 
-            this.A_Label.AutoSize = true;
             this.A_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.A_Label.Location = new System.Drawing.Point(228, 9);
             this.A_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.A_Label.Name = "A_Label";
-            this.A_Label.Size = new System.Drawing.Size(28, 15);
+            this.A_Label.Size = new System.Drawing.Size(53, 15);
             this.A_Label.TabIndex = 14;
             this.A_Label.Text = "A: ";
             this.A_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // B_Label
             // 
-            this.B_Label.AutoSize = true;
             this.B_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.B_Label.Location = new System.Drawing.Point(229, 98);
             this.B_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.B_Label.Name = "B_Label";
-            this.B_Label.Size = new System.Drawing.Size(28, 15);
+            this.B_Label.Size = new System.Drawing.Size(53, 15);
             this.B_Label.TabIndex = 13;
             this.B_Label.Text = "B: ";
             this.B_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // G_Label
             // 
-            this.G_Label.AutoSize = true;
             this.G_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.G_Label.Location = new System.Drawing.Point(229, 68);
             this.G_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.G_Label.Name = "G_Label";
-            this.G_Label.Size = new System.Drawing.Size(28, 15);
+            this.G_Label.Size = new System.Drawing.Size(53, 15);
             this.G_Label.TabIndex = 12;
             this.G_Label.Text = "G: ";
             this.G_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // R_Label
             // 
-            this.R_Label.AutoSize = true;
             this.R_Label.Font = new System.Drawing.Font("Fira Code SemiBold", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.R_Label.Location = new System.Drawing.Point(229, 38);
             this.R_Label.MinimumSize = new System.Drawing.Size(10, 5);
             this.R_Label.Name = "R_Label";
-            this.R_Label.Size = new System.Drawing.Size(28, 15);
+            this.R_Label.Size = new System.Drawing.Size(53, 15);
             this.R_Label.TabIndex = 11;
             this.R_Label.Text = "R: ";
             this.R_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.R_Label.Click += new System.EventHandler(this.R_Label_Click);
             // 
             // btn_WhiteCircle
             // 
@@ -488,12 +487,24 @@ namespace BenDraw
             // 
             // panel_lower
             // 
-            this.panel_lower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_lower.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel_lower.Controls.Add(this.cursorLocation);
+            this.panel_lower.Controls.Add(this.cursor);
             this.panel_lower.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_lower.Location = new System.Drawing.Point(0, 776);
+            this.panel_lower.Location = new System.Drawing.Point(0, 770);
             this.panel_lower.Name = "panel_lower";
-            this.panel_lower.Size = new System.Drawing.Size(1554, 27);
+            this.panel_lower.Size = new System.Drawing.Size(1554, 33);
             this.panel_lower.TabIndex = 0;
+            // 
+            // cursor
+            // 
+            this.cursor.Image = ((System.Drawing.Image)(resources.GetObject("cursor.Image")));
+            this.cursor.Location = new System.Drawing.Point(9, 3);
+            this.cursor.Name = "cursor";
+            this.cursor.Size = new System.Drawing.Size(25, 24);
+            this.cursor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cursor.TabIndex = 0;
+            this.cursor.TabStop = false;
             // 
             // pic
             // 
@@ -501,7 +512,7 @@ namespace BenDraw
             this.pic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic.Location = new System.Drawing.Point(0, 128);
             this.pic.Name = "pic";
-            this.pic.Size = new System.Drawing.Size(1554, 648);
+            this.pic.Size = new System.Drawing.Size(1554, 642);
             this.pic.TabIndex = 0;
             this.pic.TabStop = false;
             this.pic.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pic_KeyDown);
@@ -509,6 +520,16 @@ namespace BenDraw
             this.pic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.pic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_MouseMove);
             this.pic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_MouseUp);
+            // 
+            // cursorLocation
+            // 
+            this.cursorLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cursorLocation.Location = new System.Drawing.Point(40, 11);
+            this.cursorLocation.Name = "cursorLocation";
+            this.cursorLocation.ReadOnly = true;
+            this.cursorLocation.Size = new System.Drawing.Size(100, 16);
+            this.cursorLocation.TabIndex = 2;
+            this.cursorLocation.Text = "(X, Y)";
             // 
             // Form1
             // 
@@ -530,6 +551,9 @@ namespace BenDraw
             ((System.ComponentModel.ISupportInitialize)(this.A_Value)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.color_picker)).EndInit();
+            this.panel_lower.ResumeLayout(false);
+            this.panel_lower.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cursor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             this.ResumeLayout(false);
 
@@ -565,6 +589,8 @@ namespace BenDraw
         private System.Windows.Forms.TrackBar R_Value;
         private System.Windows.Forms.TrackBar A_Value;
         private System.Windows.Forms.Label penThicknessLabel;
+        private System.Windows.Forms.PictureBox cursor;
+        private System.Windows.Forms.TextBox cursorLocation;
     }
 }
 
